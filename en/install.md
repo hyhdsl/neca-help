@@ -78,7 +78,7 @@ cd /opt/ipsec
 docker compose -f docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
 neca web status
 neca web readonly off
-docker compose -f docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
 `readonly off` requires the helper to be healthy, the socket permissions to be correct
@@ -101,11 +101,13 @@ docker pull ghcr.io/hyhdsl/neca-web:v0.3.0
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
-Changing `readOnly` or `idleTimeout` requires an explicit restart:
+Changing `readOnly` or `idleTimeout` requires a SIGHUP:
 
 ~~~bash
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
+
+Listener (`web.listen`) changes still require a restart.
 
 ## 7. Rollback
 

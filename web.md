@@ -85,18 +85,19 @@ cd /opt/ipsec
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
 neca web status
 neca web readonly off
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
 关闭写能力：
 
 ~~~bash
 neca web readonly on
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
-**重要**：`readOnly` 修改后只执行 `docker compose up -d` 不会让已运行的 Web
-进程重新加载配置；必须 `restart web`。
+**重要**：`readOnly` / `idleTimeout` 修改后发送 SIGHUP 即可让运行中的 necad 重载：
+`docker kill --signal=HUP neca-web`。`web.listen`、`adminCNs`、passkey 变更仍需
+重启 web 容器。
 
 Web 写操作仅包含 issue/revoke/unrevoke/reissue；**不支持 delete/package/设置编辑**。
 helper 的 `readOnly` 检查是第二道闸门，不能只依赖 UI 隐藏按钮。
@@ -150,7 +151,7 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 - helper 是唯一 root 写边界；拿到 helper 等价于拿到高权限，必须限制 socket 访问。
 - 默认不发布端口；优先 SSH 隧道。
 - Passkey 仅保留接口与配置开关，当前未注册登录路由。
-- SIGHUP 热重载未实现；配置变更需重启。
+- SIGHUP 支持 readOnly/idleTimeout 热重载；listen/adminCNs/passkey 变更需重启。
 
 ## 排障入口
 

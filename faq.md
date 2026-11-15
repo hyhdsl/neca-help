@@ -13,7 +13,7 @@ strongSwan 的部署、防火墙和 IKEv2 配置不在本项目范围内。
 ## Web 默认能写吗？
 
 不能。`readOnly=true` 是默认值。需要 helper 健康并显式执行 `neca web readonly off`，
-再重启 web 容器，才开放 issue/revoke/unrevoke/reissue。
+再发送 SIGHUP（`docker kill --signal=HUP neca-web`），才开放 issue/revoke/unrevoke/reissue。
 
 ## Web 能删除证书吗？
 

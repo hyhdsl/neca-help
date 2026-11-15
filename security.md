@@ -50,7 +50,7 @@ Web 进程固定 UID/GID 10001，非 root。CLI 以 root 执行 CA 操作。lite
 ## 会话与密钥轮换
 
 - 空闲超时默认 30m；绝对上限 24h。
-- 修改 `readOnly` / `idleTimeout` 后重启 necad。
+- 修改 `readOnly` / `idleTimeout` 后发送 SIGHUP（`docker kill --signal=HUP neca-web`）；`web.listen`/`adminCNs`/passkey 仍需重启。
 - 轮换 `session.key` 会使现有会话失效；在维护窗口执行。
 - 管理员密码通过 `neca web hash-password` 生成哈希，不要写进 `neca.env`。
 - 若部署流程生成了初始密码文件，它只应短期存在；首次登录后删除或转移到密码管理器。

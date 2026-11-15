@@ -76,7 +76,7 @@ cd /opt/ipsec
 docker compose -f docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
 neca web status
 neca web readonly off
-docker compose -f docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
 写能力不是默认值。`readonly off` 需要 helper 可用、socket 权限正确且 CA 私钥存在。
@@ -100,13 +100,13 @@ docker pull ghcr.io/hyhdsl/neca-web:v0.3.0
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
-修改 `readOnly` / `idleTimeout` 后要显式重启：
+修改 `readOnly` / `idleTimeout` 后发送 SIGHUP：
 
 ~~~bash
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
-只执行 `up -d` 不会让已运行的 Web 进程重新读取配置。
+只执行 `up -d` 不会让已运行的 Web 进程重新读取配置；`web.listen` 等监听类配置仍需重启。
 
 ## 7. 回滚
 

@@ -40,12 +40,14 @@ docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
 
 ## 修改了 readOnly，但页面仍显示旧状态
 
-只执行 `docker compose up -d` 不会重启已存在的 Web 进程。必须：
+只执行 `docker compose up -d` 不会重载已存在的 Web 进程。发送 SIGHUP：
 
 ~~~bash
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 neca web status
 ~~~
+
+`web.listen` 变更仍需重启 web 容器。
 
 ## 页面显示“helper 不可用”
 

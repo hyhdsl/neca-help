@@ -83,18 +83,19 @@ cd /opt/ipsec
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
 neca web status
 neca web readonly off
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
 Disable writes:
 
 ~~~bash
 neca web readonly on
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+docker kill --signal=HUP neca-web
 ~~~
 
-**Important:** `docker compose up -d` alone does not make an already-running Web
-process reload `readOnly`; restart `web` explicitly.
+**Important:** send SIGHUP after changing `readOnly` / `idleTimeout`:
+`docker kill --signal=HUP neca-web`. `web.listen`, `adminCNs` and passkey changes
+still require a Web restart.
 
 Web writes support issue/revoke/unrevoke/reissue only. They do not support delete,
 package or settings editing. The helper checks `readOnly` independently; hiding buttons
@@ -144,7 +145,7 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
 - The helper is the only root write boundary; protect its socket.
 - No public port; prefer SSH tunneling.
 - Passkey is only an interface/feature flag and has no login route yet.
-- SIGHUP hot reload is not implemented; restart after config changes.
+- SIGHUP hot reload is implemented for readOnly/idleTimeout; web.listen/adminCNs/passkey changes require a restart.
 
 ## Related
 
