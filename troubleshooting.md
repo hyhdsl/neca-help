@@ -160,10 +160,10 @@ Linux/macOS 脚本未覆盖所有发行版；先在测试机验证。
 
 帮助站点是独立的 GitHub Pages 静态站，不影响 neca 运行。若自定义域名异常：
 
-1. 检查 Cloudflare `neca` CNAME 是否指向 `hyhdsl.github.io` 且为 DNS only；
-2. 检查 GitHub Pages 的自定义域名与证书状态；
-3. 直接访问 `https://hyhdsl.github.io/deepseek-neca-help.github.io/` 验证源站；
-4. 证书签发通常需要几分钟，必要时先在 GitHub Pages 设置中重新保存域名。
+1. 检查 Cloudflare `neca` CNAME 是否指向 `hyhdsl.github.io`；
+2. 若启用 Cloudflare 代理，确认 Cloudflare 的 TLS 证书覆盖 `neca`，并检查 SSL/TLS 模式；
+3. 直接访问 `https://hyhdsl.github.io/deepseek-neca-help.github.io/` 验证 GitHub Pages 源站（会跳转到自定义域名）；
+4. GitHub Pages 自定义域证书可能延迟；在证书就绪前可继续使用 Cloudflare 代理提供的 HTTPS。
 
 ## 仍然无法解决
 

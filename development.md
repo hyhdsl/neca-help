@@ -54,6 +54,10 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 本帮助站点的源文件在 `docs/help/`，使用 GitBook 兼容的
 `README.md` + `SUMMARY.md` 结构，并由 Docsify 在 GitHub Pages 上静态渲染。
 
+当前 `neca.nekobiglazyer.work` 的 CNAME 指向 `hyhdsl.github.io`，由 Cloudflare
+代理提供 HTTPS；GitHub Pages 仍是源站。若关闭代理，需要等 GitHub Pages 自定义
+域证书签发后再强制 HTTPS。
+
 为什么不是 GitBook SaaS：GitBook 的自定义域名属于付费功能；本项目需要免费、
 可版本化、可自动部署的方案。保留 GitBook 结构是为了将来可以无缝导入。
 
