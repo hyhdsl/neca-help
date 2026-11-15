@@ -1,0 +1,159 @@
+# Web 面板
+
+## 定位
+
+Web 面板是可选组件，默认**只读**，用于查看证书、验证 p12、查看下载与管理会话。
+它不替代 strongSwan，也不默认暴露公网。
+
+| 组件 | 角色 | 权限 |
+|---|---|---|
+| `necad` | Web 服务端 | 非 root；只读挂载配置、索引、meta、clients、downloads |
+| `web-helper` | 写操作代理 | root；只接受 issue/revoke/unrevoke/reissue 白名单 |
+| lite CLI | 管理命令 | root；`neca web ...` |
+
+Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载这些资产。
+
+## 启用只读 Web
+
+### 1. 配置
+
+在 `/opt/ipsec/neca.json` 中：
+
+~~~json
+{
+  "web": {
+    "enabled": true,
+    "listen": "127.0.0.1:18080",
+    "readOnly": true,
+    "idleTimeout": "30m",
+    "adminCNs": [],
+    "passkey": { "enabled": false, "rpId": "", "rpName": "neca Admin" }
+  }
+}
+~~~
+
+- `idleTimeout` 允许 5m–24h；绝对会话上限固定 24h。
+- `readOnly` 默认 true。
+- `adminCNs` 仅在反向代理 mTLS 场景使用。
+- 本次生产环境 18080 被 other service 占用，实际使用 `18080`。
+
+### 2. 初始化 secrets
+
+~~~bash
+cd /opt/ipsec
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.3.0 ./init-web-secrets.sh
+~~~
+
+脚本以交互方式读取管理员密码并创建 `web-secrets/`、`session.key`、
+`password.hash`、`web-audit.log`，并确保 `neca-web` 组 GID=10001。密码不回显，
+也不写入 `neca.env`；请保存到密码管理器。若部署流程另外生成了初始密码文件，
+首次登录后删除它。
+
+### 3. 启动
+
+~~~bash
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web logs -f web
+~~~
+
+### 4. 访问
+
+默认通过系统原生 OpenSSH 本地转发：
+
+~~~bash
+ssh -L 18080:127.0.0.1:18080 root@<SERVER>
+# 浏览器打开 http://127.0.0.1:18080
+~~~
+
+若使用默认端口，改为 18080。不要把 `127.0.0.1:18080` 直接改成 `0.0.0.0`
+暴露到公网；如确需反向代理，见下一节。
+
+## 登录与会话
+
+- 管理员密码以 bcrypt 哈希保存，不保存明文。
+- 会话 Cookie 使用 HMAC 签名；HttpOnly、SameSite=Lax，HTTPS 下加 Secure。
+- 空闲超时默认 30 分钟；登录后绝对上限 24 小时。
+- 登录失败有限流；写操作强制 CSRF。
+- 退出登录后会话失效；重启 necad 也会使内存会话失效（除非实现持久化）。
+
+## 写能力（可选）
+
+默认只读。需要 Web 内签发/吊销/重签时：
+
+~~~bash
+cd /opt/ipsec
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
+neca web status
+neca web readonly off
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+~~~
+
+关闭写能力：
+
+~~~bash
+neca web readonly on
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
+~~~
+
+**重要**：`readOnly` 修改后只执行 `docker compose up -d` 不会让已运行的 Web
+进程重新加载配置；必须 `restart web`。
+
+Web 写操作仅包含 issue/revoke/unrevoke/reissue；**不支持 delete/package/设置编辑**。
+helper 的 `readOnly` 检查是第二道闸门，不能只依赖 UI 隐藏按钮。
+
+## 管理命令
+
+~~~bash
+neca web status
+neca web readonly status
+neca web readonly on
+neca web readonly off
+neca web idle-timeout status
+neca web idle-timeout 30m
+neca web hash-password
+~~~
+
+`readonly off` 只允许 root，并检查：
+
+1. helper 健康；
+2. helper socket 权限；
+3. `ca.key` 存在；
+4. 配置原子写入成功。
+
+任何一步失败都不应产生“半开启”状态。
+
+## 反向代理与 mTLS（可选）
+
+如果配置了 `web.adminCNs`，必须同时设置 `NECA_WEB_PROXY_SECRET`，由反向代理
+转发：
+
+~~~text
+X-Neca-Proxy-Secret: <共享密钥>
+X-Neca-Client-CN:   <已验证的管理员证书 CN>
+~~~
+
+necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS 终止后设置
+`NECA_WEB_SECURE_COOKIES=1` 并重启 web；OpenSSH 本地转发 HTTP 时保持未设置。
+本次生产未启用公网域名/TLS/mTLS，保留为后续可选项。
+
+## 语言与主题
+
+- 页面支持 zh-CN / en-US 切换，使用 `neca_lang` Cookie。
+- 默认语言跟随 `neca.json` 的 `language`。
+- 支持浅色/深色主题，选择保存在浏览器 localStorage。
+- 主题与语言切换不改变服务端权限或只读状态。
+
+## 安全边界
+
+- Web 容器非 root、只读根文件系统、`no-new-privileges`、`cap_drop: ALL`。
+- 不挂载 `ca.key`、客户端私钥、`docker.sock`。
+- helper 是唯一 root 写边界；拿到 helper 等价于拿到高权限，必须限制 socket 访问。
+- 默认不发布端口；优先 SSH 隧道。
+- Passkey 仅保留接口与配置开关，当前未注册登录路由。
+- SIGHUP 热重载未实现；配置变更需重启。
+
+## 排障入口
+
+- [故障排查](troubleshooting.md)
+- [安全、权限与备份](security.md)
+- [服务器部署完整版](https://github.com/hyhdsl/neca/blob/main/docs/deploy.md)
