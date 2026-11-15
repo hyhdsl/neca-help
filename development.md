@@ -62,7 +62,7 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 可版本化、可自动部署的方案。保留 GitBook 结构是为了将来可以无缝导入。
 
 站点发布仓库：
-<https://github.com/hyhdsl/deepseek-neca-help.github.io>
+<https://github.com/hyhdsl/neca-help>
 
 自定义域名：<https://neca.nekobiglazyer.work>
 

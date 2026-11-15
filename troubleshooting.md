@@ -162,7 +162,7 @@ Linux/macOS 脚本未覆盖所有发行版；先在测试机验证。
 
 1. 检查 Cloudflare `neca` CNAME 是否指向 `hyhdsl.github.io`；
 2. 若启用 Cloudflare 代理，确认 Cloudflare 的 TLS 证书覆盖 `neca`，并检查 SSL/TLS 模式；
-3. 直接访问 `https://hyhdsl.github.io/deepseek-neca-help.github.io/` 验证 GitHub Pages 源站（会跳转到自定义域名）；
+3. 直接访问 `https://hyhdsl.github.io/neca-help/` 验证 GitHub Pages 源站（会跳转到自定义域名）；
 4. GitHub Pages 自定义域证书可能延迟；在证书就绪前可继续使用 Cloudflare 代理提供的 HTTPS。
 
 ## 仍然无法解决
