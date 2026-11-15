@@ -11,7 +11,7 @@
 
 ---
 
-- Version: v0.4.0
+- Version: v0.4.1
 - [Project](https://github.com/hyhdsl/neca)
 - [Issues](https://github.com/hyhdsl/neca/issues)
 - [中文完整文档](https://neca.nekobiglazyer.work/)

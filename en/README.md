@@ -1,6 +1,6 @@
 # neca Help Center
 
-> Applies to **neca v0.4.0** (2026-11-15). neca manages strongSwan IKEv2 user
+> Applies to **neca v0.4.1** (2026-11-15). neca manages strongSwan IKEv2 user
 > certificates and client packages; it is not the VPN server itself.
 
 ## Start here
@@ -44,7 +44,7 @@ default and is not exposed directly to the Internet.
 ## Version and source
 
 - Project: <https://github.com/hyhdsl/neca>
-- Release: <https://github.com/hyhdsl/neca/releases/tag/v0.4.0>
+- Release: <https://github.com/hyhdsl/neca/releases/tag/v0.4.1>
 - Help source: <https://github.com/hyhdsl/neca/tree/main/docs/help>
 - License: <https://github.com/hyhdsl/neca/blob/main/LICENSE>
 

@@ -52,14 +52,14 @@ docker compose -f docker-compose.neca.yml run --rm neca list
 或先拉取固定版本镜像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.4.0
+docker pull ghcr.io/hyhdsl/neca:v0.4.1
 ~~~
 
 ## 4. 可选：启动只读 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.1 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -95,8 +95,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 然后：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.4.0
-docker pull ghcr.io/hyhdsl/neca-web:v0.4.0
+docker pull ghcr.io/hyhdsl/neca:v0.4.1
+docker pull ghcr.io/hyhdsl/neca-web:v0.4.1
 # 更新 compose 中的镜像标签，或使用 deploy 目录中的当前版本
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
