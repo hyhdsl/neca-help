@@ -17,7 +17,7 @@
 
 This is the core English subset. Advanced pages such as package details, daily
 operations, troubleshooting and development are currently Chinese-only; use the
-language switch or [中文完整文档](https://neca.nekobiglazyer.work/) for those pages.
+language switch or [中文完整文档](https://neca.nekobiglazyer.work/zh/) for those pages.
 
 ## Runtime forms
 

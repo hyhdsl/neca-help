@@ -1,3 +1,4 @@
+- [首页](https://neca.nekobiglazyer.work/)
 - [English](https://neca.nekobiglazyer.work/en/)
 - [帮助中心](README.md)
 - [快速开始](getting-started.md)

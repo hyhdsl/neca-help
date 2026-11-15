@@ -1,4 +1,5 @@
-- [中文](https://neca.nekobiglazyer.work/)
+- [Home](https://neca.nekobiglazyer.work/)
+- [中文](https://neca.nekobiglazyer.work/zh/)
 - [Help Center](README.md)
 - [Quick start](getting-started.md)
 - [Install, upgrade and rollback](install.md)

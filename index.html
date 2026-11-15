@@ -3,40 +3,136 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="neca v0.3.0 用户帮助中心：安装、证书管理、平台包、Web 面板、安全与故障排查。">
-  <meta name="theme-color" content="#1d4ed8">
-  <link rel="alternate" hreflang="zh-CN" href="https://neca.nekobiglazyer.work/">
-  <link rel="alternate" hreflang="en" href="https://neca.nekobiglazyer.work/en/">
-  <title>neca 帮助中心</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="custom.css">
+  <meta name="description" content="neca：面向 strongSwan IKEv2 的证书管理工具。CLI、只读 Web 面板、受控 root helper。">
+  <meta name="theme-color" content="#2f7d5a">
+  <title>neca · strongSwan 证书管理</title>
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
-  <div id="app">正在加载 neca 帮助中心…</div>
-  <noscript>本帮助中心需要启用 JavaScript；你也可以直接阅读 <a href="README.md">README.md</a>。</noscript>
-  <script>
-    window.$docsify = {
-      name: 'neca 帮助中心',
-      repo: 'https://github.com/hyhdsl/neca',
-      homepage: 'README.md',
-      loadSidebar: '_sidebar.md',
-      subMaxLevel: 3,
-      auto2top: true,
-      mergeNavbar: true,
-      search: {
-        placeholder: '搜索文档…',
-        noData: '没有找到相关结果',
-        depth: 3,
-        maxAge: 86400000
-      },
-      copyCode: {
-        buttonText: '复制',
-        errorText: '复制失败'
-      }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/copy-code.min.js"></script>
+  <header class="site-nav">
+    <a class="brand" href="/">
+      <span class="brand-mark">n</span>
+      <span>neca</span>
+    </a>
+    <nav aria-label="主导航">
+      <a href="#features">功能</a>
+      <a href="#quickstart">快速开始</a>
+      <a href="/zh/">中文文档</a>
+      <a href="/en/">English</a>
+      <a href="https://github.com/hyhdsl/neca" rel="noopener">GitHub</a>
+    </nav>
+    <a class="nav-cta" href="/zh/#/getting-started">开始使用</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> neca v0.4.0 · AGPL-3.0-only</p>
+        <h1>证书管理<br><em>回归简单。</em></h1>
+        <p class="lead">为 strongSwan IKEv2 准备的轻量证书管理工具。一个 CLI，一个可选的只读 Web 面板，一条受控的 root helper 写边界。</p>
+        <div class="actions">
+          <a class="button primary" href="/zh/#/getting-started">阅读快速开始</a>
+          <a class="button ghost" href="https://github.com/hyhdsl/neca" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
+        </div>
+        <ul class="hero-points">
+          <li>Go · 单静态二进制</li>
+          <li>Docker · amd64 / arm64</li>
+          <li>默认只读 · helper 受控写</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="terminal">
+          <div class="terminal-bar"><span></span><span></span><span></span><b>ops</b></div>
+          <pre><code><span class="prompt">$</span> docker pull ghcr.io/hyhdsl/neca:v0.4.0
+<span class="ok">✓</span> image ready
+
+<span class="prompt">$</span> neca list
+CN        STATUS   PLATFORMS
+alice     valid    windows, android
+team-01   valid    linux, ios
+
+<span class="prompt">$</span> neca issue alice \
+    --platforms windows,android \
+    --zip
+<span class="ok">✓</span> certificate issued
+</code></pre>
+        </div>
+        <div class="floating-card">
+          <span class="card-kicker">Web 面板</span>
+          <strong>默认只读</strong>
+          <small>写操作由 root helper 白名单执行</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-head">
+        <p class="eyebrow">WHY NECA</p>
+        <h2>把证书生命周期收进一个工具</h2>
+        <p>不引入第二份状态存储，不把 CA 私钥交给 Web 进程。</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-icon">⌘</div>
+          <h3>一条命令完成签发</h3>
+          <p>issue / reissue / revoke / unrevoke / delete，覆盖证书、平台包与 CRL。</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">◐</div>
+          <h3>默认只读的 Web</h3>
+          <p>查看证书、验证 p12、受保护下载；需要写时再显式开启 helper。</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">⌁</div>
+          <h3>清晰的权限边界</h3>
+          <p>Web 容器非 root，无 ca.key、无 docker.sock；写操作只走 Unix socket 白名单。</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">↻</div>
+          <h3>为运维而设计</h3>
+          <p>JSON 配置、审计日志、SIGHUP 热重载、可持久化的 requestId 幂等缓存。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="quickstart" class="quickstart">
+      <div class="quickstart-copy">
+        <p class="eyebrow">QUICK START</p>
+        <h2>从容器到第一张证书</h2>
+        <p>固定版本标签，先 dry-run，再签发。生产环境通过 OpenSSH 本地转发访问 Web。</p>
+        <a class="text-link" href="/zh/#/install">阅读部署说明 <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="code-card">
+        <div class="code-title">终端</div>
+        <pre><code><span class="prompt">$</span> docker pull ghcr.io/hyhdsl/neca:v0.4.0
+<span class="prompt">$</span> neca version
+<span class="prompt">$</span> neca issue alice \
+    --platforms windows,android \
+    --zip --dry-run
+<span class="prompt">$</span> neca issue alice \
+    --platforms windows,android --zip
+</code></pre>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong>v0.4.0</strong><span>当前正式版</span></div>
+      <div><strong>M0–M8</strong><span>核心能力与运维加固</span></div>
+      <div><strong>AGPL-3.0-only</strong><span>开源许可</span></div>
+      <div><strong>amd64 / arm64</strong><span>多架构镜像</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand"><span class="brand-mark">n</span> neca</div>
+    <p>strongSwan IKEv2 证书管理 · 默认只读 Web · 受控 root helper</p>
+    <div class="footer-links">
+      <a href="/zh/">中文文档</a>
+      <a href="/en/">English</a>
+      <a href="/zh/#/api">API</a>
+      <a href="https://github.com/hyhdsl/neca/releases/tag/v0.4.0" rel="noopener">v0.4.0 Release</a>
+      <a href="https://github.com/hyhdsl/neca" rel="noopener">GitHub</a>
+    </div>
+  </footer>
 </body>
 </html>

@@ -151,6 +151,6 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
 
 ## Related
 
-- [Troubleshooting (Chinese)](../troubleshooting.md)
+- [Troubleshooting (Chinese)](../zh/troubleshooting.md)
 - [Security, permissions and backups](security.md)
 - [Full deployment guide](https://github.com/hyhdsl/neca/blob/main/docs/deploy.md)

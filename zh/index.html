@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="neca v0.4.0 用户帮助中心：安装、证书管理、平台包、Web 面板、安全与故障排查。">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="alternate" hreflang="zh-CN" href="https://neca.nekobiglazyer.work/zh/">
+  <link rel="alternate" hreflang="en" href="https://neca.nekobiglazyer.work/en/">
+  <title>neca 帮助中心</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="../custom.css">
+</head>
+<body>
+  <div id="app">正在加载 neca 帮助中心…</div>
+  <noscript>本帮助中心需要启用 JavaScript；你也可以直接阅读 <a href="README.md">README.md</a>。</noscript>
+  <script>
+    window.$docsify = {
+      name: 'neca 帮助中心',
+      repo: 'https://github.com/hyhdsl/neca',
+      homepage: 'README.md',
+      loadSidebar: '_sidebar.md',
+      subMaxLevel: 3,
+      auto2top: true,
+      mergeNavbar: true,
+      search: {
+        placeholder: '搜索文档…',
+        noData: '没有找到相关结果',
+        depth: 3,
+        maxAge: 86400000
+      },
+      copyCode: {
+        buttonText: '复制',
+        errorText: '复制失败'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/copy-code.min.js"></script>
+</body>
+</html>
