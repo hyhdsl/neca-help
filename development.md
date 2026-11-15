@@ -69,6 +69,9 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 
 自定义域名：<https://neca.nekobiglazyer.work>
 
+发布方式：从已提交的 `docs/help` 运行 `make publish-help` 查看差异，确认后用
+`make publish-help-apply` 推送；脚本默认 dry-run，且不会发布工作区未提交的改动。
+
 ## 贡献与反馈
 
 - 开发期暂不接受外部 Pull Request；
