@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="neca v0.3.0 help center: installation, certificates, Web panel, security, FAQ and API.">
+  <meta name="theme-color" content="#1d4ed8">
+  <title>neca Help Center</title>
+  <link rel="alternate" hreflang="zh-CN" href="https://neca.nekobiglazyer.work/">
+  <link rel="alternate" hreflang="en" href="https://neca.nekobiglazyer.work/en/">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="../custom.css">
+</head>
+<body>
+  <div id="app">Loading neca Help Center…</div>
+  <noscript>This help center requires JavaScript. You can read <a href="README.md">README.md</a> directly.</noscript>
+  <script>
+    window.$docsify = {
+      name: 'neca Help Center',
+      repo: 'https://github.com/hyhdsl/neca',
+      homepage: 'README.md',
+      loadSidebar: '_sidebar.md',
+      subMaxLevel: 3,
+      auto2top: true,
+      mergeNavbar: true,
+      search: {
+        placeholder: 'Search docs…',
+        noData: 'No results',
+        depth: 3,
+        maxAge: 86400000
+      },
+      copyCode: {
+        buttonText: 'Copy',
+        errorText: 'Copy failed'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/copy-code.min.js"></script>
+</body>
+</html>

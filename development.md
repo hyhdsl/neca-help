@@ -58,8 +58,11 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 代理提供 HTTPS；GitHub Pages 仍是源站。若关闭代理，需要等 GitHub Pages 自定义
 域证书签发后再强制 HTTPS。
 
-为什么不是 GitBook SaaS：GitBook 的自定义域名属于付费功能；本项目需要免费、
-可版本化、可自动部署的方案。保留 GitBook 结构是为了将来可以无缝导入。
+英文核心页位于 `docs/help/en/`；高阶页面暂保留中文，语言切换在页面右上角。
+
+为什么不是 GitBook SaaS：GitBook 的自定义域名属于付费功能，自动翻译也是付费
+附加项；本项目需要免费、可版本化、可自动部署的方案。保留 GitBook 结构是为了
+将来可以无缝导入。英文核心页当前为手工维护，避免按量翻译费用。
 
 站点发布仓库：
 <https://github.com/hyhdsl/neca-help>

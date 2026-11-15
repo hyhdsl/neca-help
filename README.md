@@ -9,7 +9,9 @@
 - 已有服务器：看 [安装、升级与回滚](install.md) 和 [部署与日常运维](operations.md)。
 - 管理证书：看 [证书管理](certificates.md)。
 - 使用 Web 面板：看 [Web 面板](web.md)。
+- 需要自动化：看 [Web API（实验性）](api.md)。
 - 出问题：看 [故障排查](troubleshooting.md) 和 [常见问题](faq.md)。
+- English core pages: <https://neca.nekobiglazyer.work/en/>
 
 ## 运行形态
 
