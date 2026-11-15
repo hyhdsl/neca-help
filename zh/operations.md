@@ -81,7 +81,7 @@ sha256sum /opt/ipsec/pki/ca/index.txt
 sha256sum /opt/ipsec/swanctl/x509crl/ca.crl.pem
 ~~~
 
-v0.3.0 部署基线（v0.4.0 沿用同一 PKI 基线）：
+v0.4.0 部署基线（沿用 v0.3.0 的 PKI 基线）：
 
 - `index.txt`：`redacted…redacted`
 - CRL：`redacted…redacted`
