@@ -41,7 +41,7 @@ Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.3.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.0 ./init-web-secrets.sh
 ~~~
 
 脚本以交互方式读取管理员密码并创建 `web-secrets/`、`session.key`、

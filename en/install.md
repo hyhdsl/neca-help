@@ -53,14 +53,14 @@ docker compose -f docker-compose.neca.yml run --rm neca list
 Pull a pinned image if needed:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.3.0
+docker pull ghcr.io/hyhdsl/neca:v0.4.0
 ~~~
 
 ## 4. Optional read-only Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.3.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.0 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -96,8 +96,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 Then pull the pinned tags, update the compose image tags, and recreate the Web service:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.3.0
-docker pull ghcr.io/hyhdsl/neca-web:v0.3.0
+docker pull ghcr.io/hyhdsl/neca:v0.4.0
+docker pull ghcr.io/hyhdsl/neca-web:v0.4.0
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 

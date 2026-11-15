@@ -1,6 +1,6 @@
 # neca 帮助中心
 
-> 适用于 **neca v0.3.0**（2026-11-15）。neca 是 strongSwan IKEv2 用户证书管理工具，
+> 适用于 **neca v0.4.0**（2026-11-15）。neca 是 strongSwan IKEv2 用户证书管理工具，
 > 不是 VPN 服务端本身；它负责签发、吊销、重签证书，生成客户端包，并维护 CRL。
 
 ## 先看这里
@@ -34,7 +34,7 @@ lite 与 neca-web 使用同一版本标签；Web 默认只监听回环地址，�
 ## 版本与来源
 
 - 项目：<https://github.com/hyhdsl/neca>
-- 正式版：<https://github.com/hyhdsl/neca/releases/tag/v0.3.0>
+- 正式版：<https://github.com/hyhdsl/neca/releases/tag/v0.4.0>
 - 帮助文档源码：<https://github.com/hyhdsl/neca/tree/main/docs/help>
 - 许可：<https://github.com/hyhdsl/neca/blob/main/LICENSE>
 
