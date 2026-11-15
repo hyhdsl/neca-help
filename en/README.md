@@ -48,5 +48,8 @@ default and is not exposed directly to the Internet.
 - Help source: <https://github.com/hyhdsl/neca/tree/main/docs/help>
 - License: <https://github.com/hyhdsl/neca/blob/main/LICENSE>
 
-> AI disclosure: code, tests and documentation were produced with AI assistance.
-> Review and test before production use.
+> **AI disclosure:** all code authoring, debugging, testing, CI/build/deploy
+> scripting, documentation and this help site were produced by an AI agent. The human
+> maintainer defines requirements, reviews changes, performs functional acceptance and
+> handles production operations. See [AI-DISCLOSURE.md](https://github.com/hyhdsl/neca/blob/main/AI-DISCLOSURE.md)
+> for scope and limits. AI output may contain errors; review and test before production use.

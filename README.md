@@ -38,4 +38,4 @@ lite 与 neca-web 使用同一版本标签；Web 默认只监听回环地址，�
 - 帮助文档源码：<https://github.com/hyhdsl/neca/tree/main/docs/help>
 - 许可：<https://github.com/hyhdsl/neca/blob/main/LICENSE>
 
-> AI 披露：本项目代码、测试与文档由 AI 编程助手辅助生成；请自行审查并在生产前验证。
+> **AI 披露**：本项目代码编写、调试、测试、CI/构建/部署脚本、文档与帮助站内容由 AI 完成；人类维护者负责需求、审查、功能验收与生产操作。完整说明见 [AI-DISCLOSURE.md](https://github.com/hyhdsl/neca/blob/main/AI-DISCLOSURE.md)。AI 输出可能有误，请自行审查并在生产前验证。
