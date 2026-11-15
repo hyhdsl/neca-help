@@ -149,6 +149,8 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 - Web 容器非 root、只读根文件系统、`no-new-privileges`、`cap_drop: ALL`。
 - 不挂载 `ca.key`、客户端私钥、`docker.sock`。
 - helper 是唯一 root 写边界；拿到 helper 等价于拿到高权限，必须限制 socket 访问。
+- helper 幂等缓存默认落盘到 `/run/neca/web-helper-cache.json`（0600，TTL 24h）；
+  文件损坏时忽略并重建，不会阻塞写操作。
 - 默认不发布端口；优先 SSH 隧道。
 - Passkey 仅保留接口与配置开关，当前未注册登录路由。
 - SIGHUP 支持 readOnly/idleTimeout 热重载；listen/adminCNs/passkey 变更需重启。

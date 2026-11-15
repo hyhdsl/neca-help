@@ -102,7 +102,8 @@ curl -sS -b "$JAR" \
 ~~~
 
 `requestId` 也可以放在 `X-Request-ID` 请求头。相同 ID 的重复请求会命中 helper 的
-幂等缓存；缓存只在 helper 进程内，helper 重启后失效。
+幂等缓存；缓存默认落盘到 `/run/neca/web-helper-cache.json`（0600，TTL 24h），
+可由 `NECA_WEB_HELPER_CACHE_FILE` 覆盖，重启后仍保留（文件损坏时从空缓存重建）。
 
 ## 示例：吊销
 

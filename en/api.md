@@ -98,8 +98,10 @@ curl -sS -b "$JAR" \
 ~~~
 
 `requestId` may also be sent as `X-Request-ID`. Repeated requests with the same ID use
-the helper's idempotency cache; the cache is in-memory and is lost when the helper
-restarts.
+the helper's idempotency cache. The cache is persisted to
+`/run/neca/web-helper-cache.json` (0600, 24h TTL), overridable with
+`NECA_WEB_HELPER_CACHE_FILE`, and survives helper restarts; corrupt files are ignored
+and rebuilt empty.
 
 ## Revoke example
 

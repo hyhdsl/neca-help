@@ -143,6 +143,8 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
   `cap_drop: ALL`.
 - It does not mount `ca.key`, client private keys or `docker.sock`.
 - The helper is the only root write boundary; protect its socket.
+- The helper idempotency cache persists at `/run/neca/web-helper-cache.json`
+  (0600, 24h TTL); corrupt files are ignored and rebuilt without blocking writes.
 - No public port; prefer SSH tunneling.
 - Passkey is only an interface/feature flag and has no login route yet.
 - SIGHUP hot reload is implemented for readOnly/idleTimeout; web.listen/adminCNs/passkey changes require a restart.
