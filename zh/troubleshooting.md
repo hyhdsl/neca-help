@@ -93,8 +93,8 @@ ls -l /run/neca/web-helper.sock
 检查 `neca.json`、`clients`、`downloads` 的组权限：
 
 ~~~bash
-chgrp neca-web /opt/ipsec/neca.json
-chmod 0640 /opt/ipsec/neca.json
+chgrp neca-web /opt/ipsec/config/neca.json
+chmod 0640 /opt/ipsec/config/neca.json
 chgrp -R neca-web /opt/ipsec/clients /opt/ipsec/downloads
 chmod -R g+rX /opt/ipsec/clients /opt/ipsec/downloads
 ~~~

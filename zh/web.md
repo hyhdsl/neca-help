@@ -17,7 +17,7 @@ Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载�
 
 ### 1. 配置
 
-在 `/opt/ipsec/neca.json` 中：
+在 `/opt/ipsec/config/neca.json` 中：
 
 ~~~json
 {

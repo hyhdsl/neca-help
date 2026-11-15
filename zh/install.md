@@ -20,16 +20,17 @@ install -d -m 0755 /opt/ipsec
 install -m 0600 deploy/neca.env.example /opt/ipsec/neca.env
 install -m 0644 deploy/docker-compose.neca.yml /opt/ipsec/docker-compose.neca.yml
 install -m 0755 deploy/init-web-secrets.sh /opt/ipsec/init-web-secrets.sh
-install -m 0600 deploy/neca.json.example /opt/ipsec/neca.json
+install -d -m 0750 -o root -g neca-web /opt/ipsec/config
+install -m 0600 deploy/neca.json.example /opt/ipsec/config/neca.json
 ~~~
 
 `neca.env` 只保留 bootstrap：
 
 ~~~bash
-NECA_CONFIG=/opt/ipsec/neca.json
+NECA_CONFIG=/opt/ipsec/config/neca.json
 ~~~
 
-真实 `SERVER_ID`、`ORG`、`CA_CN` 写入 `/opt/ipsec/neca.json`，不要提交仓库。
+真实 `SERVER_ID`、`ORG`、`CA_CN` 写入 `/opt/ipsec/config/neca.json`，不要提交仓库。配置目录单独挂载给 Web，SIGHUP 才能看到原子替换后的新文件。
 
 ## 2. 安装命令包装
 

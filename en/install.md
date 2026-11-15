@@ -21,16 +21,17 @@ install -d -m 0755 /opt/ipsec
 install -m 0600 deploy/neca.env.example /opt/ipsec/neca.env
 install -m 0644 deploy/docker-compose.neca.yml /opt/ipsec/docker-compose.neca.yml
 install -m 0755 deploy/init-web-secrets.sh /opt/ipsec/init-web-secrets.sh
-install -m 0600 deploy/neca.json.example /opt/ipsec/neca.json
+install -d -m 0750 -o root -g neca-web /opt/ipsec/config
+install -m 0600 deploy/neca.json.example /opt/ipsec/config/neca.json
 ~~~
 
 `neca.env` only carries bootstrap configuration:
 
 ~~~bash
-NECA_CONFIG=/opt/ipsec/neca.json
+NECA_CONFIG=/opt/ipsec/config/neca.json
 ~~~
 
-Put real `SERVER_ID`, `ORG` and `CA_CN` in `/opt/ipsec/neca.json`; never commit them.
+Put real `SERVER_ID`, `ORG` and `CA_CN` in `/opt/ipsec/config/neca.json`; never commit them. Mount the config directory separately so SIGHUP sees atomic replacements.
 
 ## 2. Install the command wrapper
 

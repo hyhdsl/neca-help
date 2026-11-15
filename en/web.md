@@ -19,7 +19,7 @@ mounts those assets.
 
 ### Configuration
 
-In `/opt/ipsec/neca.json`:
+In `/opt/ipsec/config/neca.json`:
 
 ~~~json
 {
