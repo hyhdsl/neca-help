@@ -111,7 +111,15 @@ neca web readonly off
 neca web idle-timeout status
 neca web idle-timeout 30m
 neca web hash-password
+neca web export on
+neca web export off
+neca web lock
+neca web lockdown
 ~~~
+
+- `web lock`：原子设置只读并递增 `web.sessionEpoch`，发送 SIGHUP；旧会话全部失效，服务保留。默认 Y/N 为 N；后台自动化可用 `--yes`。
+- `web lockdown`：只停止明确命名的 `web` 与 `web-helper`，不触碰 SSH/strongSwan/VPN；默认 Y/N 为 N。
+- `web export on/off`：默认关闭；只提供 issued/revoked CSV。关闭时 `/export/*.csv` 与 `/api/v1/export/*.csv` 返回 404。
 
 `readonly off` 只允许 root，并检查：
 
