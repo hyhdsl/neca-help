@@ -121,6 +121,8 @@ neca web lockdown
 - `web lockdown`：只停止明确命名的 `web` 与 `web-helper`，不触碰 SSH/strongSwan/VPN；默认 Y/N 为 N。
 - `web export on/off`：默认关闭；只提供 issued/revoked CSV。关闭时 `/export/*.csv` 与 `/api/v1/export/*.csv` 返回 404。
 
+`/settings` 设置页：语言/主题可直接调整；高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在设置页修改 readOnly、idleTimeout 与 CSV 导出；必须重新输入管理员密码、勾选 Y 确认并携带 CSRF。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
+
 `readonly off` 只允许 root，并检查：
 
 1. helper 健康；
