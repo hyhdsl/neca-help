@@ -36,7 +36,7 @@ neca version
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web restart web
 ~~~
 
-本次生产环境 18080 被 other service 占用，所以使用 18080。
+默认使用 18080；若端口已被其他服务占用，改为其他回环端口并重启 `neca-web`。
 
 ## 修改了 readOnly，但页面仍显示旧状态
 

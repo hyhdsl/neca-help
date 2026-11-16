@@ -96,8 +96,7 @@ ssh -L 18080:127.0.0.1:18080 root@<SERVER>
 # Open http://127.0.0.1:18080
 ~~~
 
-If the server still uses the default port, replace 18080 with 18080. See
-[Web panel](web.md).
+If `web.listen` was changed, use the configured port. See [Web panel](web.md).
 
 ## Output and exit codes
 

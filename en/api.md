@@ -18,7 +18,7 @@ documentation. The Web panel is normally reached through an SSH tunnel:
 http://127.0.0.1:18080
 ~~~
 
-The code default is 18080; this production server uses 18080.
+The code default is 18080; if `web.listen` was changed, use the configured port.
 
 ## Authentication
 

@@ -36,7 +36,6 @@ In `/opt/ipsec/config/neca.json`:
 
 - `idleTimeout` accepts 5m–24h; the absolute session limit is 24h.
 - `readOnly` defaults to true.
-- This production server uses `18080` because 18080 is occupied.
 
 ### Initialize secrets
 
@@ -65,8 +64,7 @@ ssh -L 18080:127.0.0.1:18080 root@<SERVER>
 # Open http://127.0.0.1:18080
 ~~~
 
-Use 18080 if the server still uses the default port. Do not bind to `0.0.0.0` or expose
-the port publicly.
+Do not bind to `0.0.0.0` or expose the port publicly.
 
 ## Authentication and sessions
 

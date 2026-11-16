@@ -69,8 +69,7 @@ The script interactively asks for the administrator password and creates
 `/opt/ipsec/web-secrets/`. Save the password in a password manager. If your deployment
 generated a temporary initial password file, delete it after the first login.
 
-The default port is `127.0.0.1:18080`. This production server uses `18080` because
-18080 is occupied by other service. Restart `neca-web` after changing `web.listen`.
+The default port is `127.0.0.1:18080`. Restart `neca-web` after changing `web.listen`.
 
 ## 5. Optional writes
 

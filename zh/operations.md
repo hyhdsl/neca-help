@@ -57,8 +57,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 固定版本标签，不使用 `latest` 作为生产依赖：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.4.1
-docker pull ghcr.io/hyhdsl/neca-web:v0.4.1
+docker pull ghcr.io/hyhdsl/neca:v0.5.0
+docker pull ghcr.io/hyhdsl/neca-web:v0.5.0
 ~~~
 
 升级前备份；升级后验证：
@@ -81,10 +81,10 @@ sha256sum /opt/ipsec/pki/ca/index.txt
 sha256sum /opt/ipsec/swanctl/x509crl/ca.crl.pem
 ~~~
 
-v0.4.1 部署基线（沿用 v0.3.0 的 PKI 基线）：
+在变更前后记录哈希，用于确认操作可解释：
 
-- `index.txt`：`redacted…redacted`
-- CRL：`redacted…redacted`
+- `index.txt`
+- CRL
 
 哈希变化不一定代表故障；签发、吊销、重签都会改变它们。关键是变更可解释、
 有审计、有备份。

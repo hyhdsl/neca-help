@@ -22,8 +22,8 @@ No. Delete is CLI-only and requires `--yes`; revoked certificates also require
 
 ## Why is the Web port 18080?
 
-The code default is `127.0.0.1:18080`. This production server uses 18080 because 18080
-is occupied by other service. Check `web.listen` in `neca.json`.
+The code default is `127.0.0.1:18080`; check `web.listen` in `neca.json`. If the port is
+occupied, choose another loopback port and restart `neca-web`.
 
 ## Can I expose Web to the Internet?
 

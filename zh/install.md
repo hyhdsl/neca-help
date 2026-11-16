@@ -67,8 +67,7 @@ docker compose -f docker-compose.neca.yml --profile web up -d web
 `/opt/ipsec/web-secrets/`。请立即把密码保存到密码管理器；如果部署流程另外生成了
 初始密码文件，首次登录后删除它。需要重置时重新生成 `password.hash`。
 
-默认端口是 `127.0.0.1:18080`；本次生产环境因 18080 被 other service 占用，使用
-`18080`。修改 `web.listen` 后必须重启 `neca-web`。
+默认端口是 `127.0.0.1:18080`。修改 `web.listen` 后必须重启 `neca-web`。
 
 ## 5. 可选：开启 Web 写能力
 
