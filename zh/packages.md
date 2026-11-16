@@ -18,19 +18,19 @@
 签发时直接生成：
 
 ~~~bash
-neca issue alice --platforms windows,linux,macos,android,ios --zip
+neca cert issue alice --platforms windows,linux,macos,android,ios --zip
 ~~~
 
 从已有证书重建：
 
 ~~~bash
-neca package alice --platforms windows,android,ios --zip
+neca cert package alice --platforms windows,android,ios --zip
 ~~~
 
 默认不生成一键安装脚本；需要时显式开启：
 
 ~~~bash
-neca issue alice --platforms windows,linux --installers windows,linux
+neca cert issue alice --platforms windows,linux --installers windows,linux
 ~~~
 
 `--installers all` 会为支持脚本的平台生成脚本，但 Linux/macOS 脚本仍应在目标
@@ -49,12 +49,12 @@ neca issue alice --platforms windows,linux --installers windows,linux
 查看与清理：
 
 ~~~bash
-neca downloads list
-neca downloads clean --expired
-neca downloads clean --all
+neca pki downloads list
+neca pki downloads clean --expired
+neca pki downloads clean --all
 ~~~
 
-如果客户端拿到的是过期链接，重新执行 `neca package <CN> --zip`。
+如果客户端拿到的是过期链接，重新执行 `neca cert package <CN> --zip`。
 
 ## 包内不应出现
 

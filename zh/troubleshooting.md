@@ -105,7 +105,7 @@ Web 只需要 `pki/ca/index.txt`、`pki/meta`、`clients`、`downloads` 和公�
 ## p12 验证失败
 
 ~~~bash
-neca verify alice
+neca cert verify alice
 ~~~
 
 常见原因：
@@ -118,7 +118,7 @@ neca verify alice
 重新生成：
 
 ~~~bash
-neca package alice --p12-profile compat --zip
+neca cert package alice --p12-profile compat --zip
 ~~~
 
 ## 吊销后 CRL 未生效
@@ -138,15 +138,15 @@ docker logs ipsec-vpn --since 2m 2>&1 | grep -i crl
 
 - 410/404 通常表示过期、已清理或 ID 不存在；
 - 默认 TTL 30m；
-- 重新执行 `neca package <CN> --zip`；
-- 检查 `neca downloads list`。
+- 重新执行 `neca cert package <CN> --zip`；
+- 检查 `neca pki downloads list`。
 
 ## 一键安装脚本没有生成
 
 默认 `--installers none`。显式开启：
 
 ~~~bash
-neca issue alice --platforms windows,linux --installers windows,linux
+neca cert issue alice --platforms windows,linux --installers windows,linux
 ~~~
 
 Linux/macOS 脚本未覆盖所有发行版；先在测试机验证。

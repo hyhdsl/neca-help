@@ -12,7 +12,7 @@ neca 不把证书状态放进数据库，仍使用 OpenSSL 兼容文件：
 | `/opt/ipsec/swanctl/x509crl/ca.crl.pem` | 供 strongSwan 加载的 CRL |
 | `/opt/ipsec/pki/audit.log` | 追加式审计日志 |
 
-不要手工编辑 `index.txt` 后不回读校验；需要补录时优先使用 `neca index sync`。
+不要手工编辑 `index.txt` 后不回读校验；需要补录时优先使用 `neca pki index sync`。
 
 ## CN 规则
 
@@ -29,29 +29,31 @@ CN 同时是 VPN 用户标识、目录名和证书 Common Name。不要使用空
 
 | 命令 | 作用 |
 |---|---|
-| `neca list` | 列出证书 |
-| `neca verify [CN]` | 检查 p12 算法、证书数量、密码 |
-| `neca issue <CN> ...` | 签发证书与平台包 |
-| `neca reissue <CN> ...` | 归档旧证书并重签 |
-| `neca revoke <CN>` | 吊销并更新 CRL |
-| `neca unrevoke <CN>` | 恢复吊销并更新 CRL |
-| `neca delete <CN> --yes` | 删除证书与客户端包 |
-| `neca platform add <CN> ...` | 补平台包 |
-| `neca platform set <CN> ...` | 修改平台标注 |
-| `neca package <CN> ...` | 从现有证书重建平台包 |
-| `neca export issued` / `neca export revoked` | 导出 CSV |
-| `neca index sync` | 为手工放入的证书补索引与元数据 |
+| `neca cert list` | 列出证书 |
+| `neca cert verify [CN]` | 检查 p12 算法、证书数量、密码 |
+| `neca cert issue <CN> ...` | 签发证书与平台包 |
+| `neca cert reissue <CN> ...` | 归档旧证书并重签 |
+| `neca cert revoke <CN>` | 吊销并更新 CRL |
+| `neca cert unrevoke <CN>` | 恢复吊销并更新 CRL |
+| `neca cert trash <CN>` | 移入回收站（可恢复） |
+| `neca trash list` / `restore <ID>` | 查看/恢复回收站条目 |
+| `neca trash purge <ID>` | 后台物理清理（Y/N，默认 N） |
+| `neca cert platform add <CN> ...` | 补平台包 |
+| `neca cert platform set <CN> ...` | 修改平台标注 |
+| `neca cert package <CN> ...` | 从现有证书重建平台包 |
+| `neca cert export issued` / `neca cert export revoked` | 导出 CSV |
+| `neca pki index sync` | 为手工放入的证书补索引与元数据 |
 
 所有写命令支持 `--dry-run`；建议先执行：
 
 ~~~bash
-neca issue alice --platforms windows,android,ios --dry-run
+neca cert issue alice --platforms windows,android,ios --dry-run
 ~~~
 
 ## 签发
 
 ~~~bash
-neca issue alice \
+neca cert issue alice \
   --platforms windows,linux,macos,android,ios \
   --days 365 \
   --installers windows \
@@ -72,10 +74,10 @@ neca issue alice \
 ## 查看与验证
 
 ~~~bash
-neca list
-neca list --json
-neca verify alice
-neca verify
+neca cert list
+neca cert list --json
+neca cert verify alice
+neca cert verify
 ~~~
 
 `verify` 会检查 p12 是否只含客户端证书、是否使用预期的算法、密码长度是否合规。
@@ -84,7 +86,7 @@ neca verify
 ## 重签
 
 ~~~bash
-neca reissue alice \
+neca cert reissue alice \
   --platforms windows,android,ios \
   --days 365 \
   --zip
@@ -96,8 +98,8 @@ neca reissue alice \
 ## 吊销与恢复
 
 ~~~bash
-neca revoke alice
-neca unrevoke alice
+neca cert revoke alice
+neca cert unrevoke alice
 ~~~
 
 两者都会重建 CRL。默认重载模式是 `creds`，通过 `swanctl --load-creds` 热加载，
@@ -107,24 +109,26 @@ neca unrevoke alice
 neca config show
 ~~~
 
-## 删除
+## 回收站
 
-删除是不可逆操作：
+`cert trash` 只把证书和相关文件移入回收站，不物理删除；Web 面板也只移入回收站。
 
 ~~~bash
-neca delete alice --yes
+neca cert trash alice
+neca trash list
+neca trash restore <ID>
 ~~~
 
-已吊销证书默认不能直接删除；如确认要清理，使用：
+回收站默认不限时保存；恢复已吊销证书不会自动取消吊销。物理清理：
 
 ~~~bash
-neca delete alice --yes --purge-revoked
+neca trash purge <ID>
 ~~~
 
-Web 面板**没有**删除入口。删除前先备份：
+`trash purge` 需要一次 Y/N（默认 N）；后台自动化可用 `--yes`。不再输入 `PURGE <CN>`，也不承诺 SSD/快照/备份上的安全擦除。清理前先备份：
 
 ~~~bash
-tar -C /opt/ipsec -czf /root/ipsec-before-delete-$(date +%Y%m%d-%H%M%S).tar.gz \
+tar -C /opt/ipsec -czf /root/ipsec-before-trash-$(date +%Y%m%d-%H%M%S).tar.gz \
   pki clients
 ~~~
 
@@ -133,27 +137,27 @@ tar -C /opt/ipsec -czf /root/ipsec-before-delete-$(date +%Y%m%d-%H%M%S).tar.gz \
 补平台（不重签）：
 
 ~~~bash
-neca platform add alice --platforms linux,macos
+neca cert platform add alice --platforms linux,macos
 ~~~
 
 修改平台标注：
 
 ~~~bash
-neca platform set alice --platforms windows,android
+neca cert platform set alice --platforms windows,android
 ~~~
 
 从现有证书重建全部包：
 
 ~~~bash
-neca package alice --platforms windows,linux,macos,android,ios --zip
+neca cert package alice --platforms windows,linux,macos,android,ios --zip
 ~~~
 
 ## 导出与索引同步
 
 ~~~bash
-neca export issued --out /root/issued.csv
-neca export revoked --out /root/revoked.csv
-neca index sync
+neca cert export issued --out /root/issued.csv
+neca cert export revoked --out /root/revoked.csv
+neca pki index sync
 ~~~
 
 CSV 使用 UTF-8 BOM，便于 Excel 直接打开。`index sync` 只补索引与元数据，
@@ -162,8 +166,8 @@ CSV 使用 UTF-8 BOM，便于 Excel 直接打开。`index sync` 只补索引与�
 ## 审计与 JSON
 
 ~~~bash
-neca list --json
-neca revoke alice --json
+neca cert list --json
+neca cert revoke alice --json
 ~~~
 
 审计日志默认 `/opt/ipsec/pki/audit.log`，每行包含时间、操作者、动作、CN、

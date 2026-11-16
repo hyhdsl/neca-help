@@ -46,7 +46,7 @@ neca config validate
 
 ~~~bash
 cd /opt/ipsec
-docker compose -f docker-compose.neca.yml run --rm neca list
+docker compose -f docker-compose.neca.yml run --rm neca cert list
 ~~~
 
 或先拉取固定版本镜像：

@@ -12,7 +12,7 @@
 ~~~bash
 neca version
 neca config show
-neca list
+neca cert list
 ~~~
 
 如果 `neca` 不存在，先安装包装命令：
@@ -24,8 +24,8 @@ install -m 0755 deploy/neca-wrapper.sh /usr/local/bin/neca
 ## 1. 查看当前证书
 
 ~~~bash
-neca list
-neca list --json
+neca cert list
+neca cert list --json
 ~~~
 
 `list` 显示状态、序列号、平台与到期时间。证书状态以
@@ -36,7 +36,7 @@ neca list --json
 先 dry-run，确认参数：
 
 ~~~bash
-neca issue alice \
+neca cert issue alice \
   --platforms windows,android,ios \
   --days 365 \
   --installers windows \
@@ -47,7 +47,7 @@ neca issue alice \
 确认后去掉 `--dry-run`：
 
 ~~~bash
-neca issue alice \
+neca cert issue alice \
   --platforms windows,android,ios \
   --days 365 \
   --installers windows \
@@ -64,25 +64,25 @@ neca issue alice \
 ## 3. 验证 p12
 
 ~~~bash
-neca verify alice
+neca cert verify alice
 ~~~
 
 `verify` 检查 p12 的算法、证书数量与密码长度。批量检查：
 
 ~~~bash
-neca verify
+neca cert verify
 ~~~
 
 ## 4. 查看下载包
 
 ~~~bash
-neca downloads list
+neca pki downloads list
 ~~~
 
 默认 TTL 为 30 分钟；过期后下载会失败。需要时可清理：
 
 ~~~bash
-neca downloads clean --expired
+neca pki downloads clean --expired
 ~~~
 
 ## 5. 可选：打开 Web 面板

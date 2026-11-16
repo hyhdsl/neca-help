@@ -13,7 +13,7 @@ as root on the server. Replace `alice` with the real user identifier.
 ~~~bash
 neca version
 neca config show
-neca list
+neca cert list
 ~~~
 
 If `neca` is missing, install the wrapper:
@@ -25,8 +25,8 @@ install -m 0755 deploy/neca-wrapper.sh /usr/local/bin/neca
 ## 1. Inspect certificates
 
 ~~~bash
-neca list
-neca list --json
+neca cert list
+neca cert list --json
 ~~~
 
 `list` shows status, serial number, platforms and expiry. The source of truth is
@@ -37,7 +37,7 @@ neca list --json
 Dry-run first:
 
 ~~~bash
-neca issue alice \
+neca cert issue alice \
   --platforms windows,android,ios \
   --days 365 \
   --installers windows \
@@ -48,7 +48,7 @@ neca issue alice \
 Then remove `--dry-run`:
 
 ~~~bash
-neca issue alice \
+neca cert issue alice \
   --platforms windows,android,ios \
   --days 365 \
   --installers windows \
@@ -65,25 +65,25 @@ created under `/opt/ipsec/downloads/`.
 ## 3. Verify the p12
 
 ~~~bash
-neca verify alice
+neca cert verify alice
 ~~~
 
 Batch verification:
 
 ~~~bash
-neca verify
+neca cert verify
 ~~~
 
 ## 4. Check downloads
 
 ~~~bash
-neca downloads list
+neca pki downloads list
 ~~~
 
 The default TTL is 30 minutes. Clean expired files:
 
 ~~~bash
-neca downloads clean --expired
+neca pki downloads clean --expired
 ~~~
 
 ## 5. Optional Web panel

@@ -4,7 +4,7 @@
 
 ~~~bash
 neca version
-neca list
+neca cert list
 neca web status
 docker compose -f /opt/ipsec/docker-compose.neca.yml ps
 ~~~
@@ -65,7 +65,7 @@ docker pull ghcr.io/hyhdsl/neca-web:v0.4.1
 
 ~~~bash
 neca version
-neca list
+neca cert list
 neca web status
 curl -fsS http://127.0.0.1:18080/healthz
 ~~~
@@ -102,7 +102,7 @@ docker logs ipsec-vpn --since 5m 2>&1 | grep -i crl
 ## 清理
 
 ~~~bash
-neca downloads clean --expired
+neca pki downloads clean --expired
 ~~~
 
 定期检查 `/opt/ipsec/downloads`。不要删除 `pki`、`clients` 或 `swanctl` 中的
