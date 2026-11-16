@@ -3,19 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="neca：面向 strongSwan IKEv2 的证书管理工具。CLI、只读 Web 面板、受控 root helper。">
+  <meta name="description" content="Neko's Efficient Certificate Administrator（neca）：面向 strongSwan IKEv2 的证书管理工具。CLI、只读 Web 面板、受控 root helper。">
   <meta name="theme-color" content="#2f7d5a">
-  <title>neca · strongSwan 证书管理</title>
+  <title>neca · Neko's Efficient Certificate Administrator</title>
   <link rel="alternate" hreflang="zh-CN" href="https://neca.nekobiglazyer.work/">
   <link rel="alternate" hreflang="en" href="https://neca.nekobiglazyer.work/?lang=en">
   <link rel="stylesheet" href="home.css">
 </head>
 <body>
   <header class="site-nav">
-    <a class="brand" href="/">
-      <span class="brand-mark">n</span>
-      <span>neca</span>
-    </a>
+    <a class="brand" href="/">neca</a>
     <nav aria-label="主导航">
       <a href="#features" data-i18n="nav.features">功能</a>
       <a href="#quickstart" data-i18n="nav.quickstart">快速开始</a>
@@ -31,7 +28,7 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="dot"></span> neca v0.4.1 · AGPL-3.0-only</p>
         <h1 data-i18n-html="hero.title">证书管理<br><em>回归简单。</em></h1>
-        <p class="lead" data-i18n="hero.lead">为 strongSwan IKEv2 准备的轻量证书管理工具。一个 CLI，一个可选的只读 Web 面板，一条受控的 root helper 写边界。</p>
+        <p class="lead" data-i18n="hero.lead">Neko's Efficient Certificate Administrator（neca）是面向 strongSwan IKEv2 的轻量证书管理工具。一个 CLI，一个可选的只读 Web 面板，一条受控的 root helper 写边界。</p>
         <div class="actions">
           <a class="button primary" href="/zh/#/getting-started" data-doc-link="/zh/#/getting-started" data-i18n="hero.start">阅读快速开始</a>
           <a class="button ghost" href="https://github.com/hyhdsl/neca" rel="noopener" data-i18n="hero.source">查看源码 ↗</a>
@@ -124,7 +121,7 @@ team-01   valid    linux, ios
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand"><span class="brand-mark">n</span> neca</div>
+    <div class="footer-brand">neca</div>
     <p data-i18n="footer.tagline">strongSwan IKEv2 证书管理 · 默认只读 Web · 受控 root helper</p>
     <div class="footer-links">
       <a href="/zh/" data-i18n="footer.docs">中文文档</a>
@@ -145,7 +142,7 @@ team-01   valid    linux, ios
           "nav.github": "GitHub",
           "nav.cta": "开始使用",
           "hero.title": "证书管理<br><em>回归简单。</em>",
-          "hero.lead": "为 strongSwan IKEv2 准备的轻量证书管理工具。一个 CLI，一个可选的只读 Web 面板，一条受控的 root helper 写边界。",
+          "hero.lead": "Neko's Efficient Certificate Administrator（neca）是面向 strongSwan IKEv2 的轻量证书管理工具。一个 CLI，一个可选的只读 Web 面板，一条受控的 root helper 写边界。",
           "hero.start": "阅读快速开始",
           "hero.source": "查看源码 ↗",
           "hero.point.go": "Go · 单静态二进制",
@@ -188,7 +185,7 @@ team-01   valid    linux, ios
           "nav.github": "GitHub",
           "nav.cta": "Get started",
           "hero.title": "Certificate management<br><em>made simple.</em>",
-          "hero.lead": "A lightweight certificate manager for strongSwan IKEv2. One CLI, an optional read-only web panel, and a controlled root helper for writes.",
+          "hero.lead": "Neko's Efficient Certificate Administrator (neca) is a lightweight certificate manager for strongSwan IKEv2. One CLI, an optional read-only web panel, and a controlled root helper for writes.",
           "hero.start": "Read the quick start",
           "hero.source": "View source ↗",
           "hero.point.go": "Go · single static binary",
@@ -243,11 +240,11 @@ team-01   valid    linux, ios
           if (lang === "zh" && base === "/en/") target = "/en/";
           el.setAttribute("href", target);
         });
-        document.title = lang === "en" ? "neca · strongSwan certificate management" : "neca · strongSwan 证书管理";
+        document.title = "neca · Neko's Efficient Certificate Administrator";
         var desc = document.querySelector('meta[name="description"]');
         if (desc) desc.setAttribute("content", lang === "en"
-          ? "neca: a lightweight strongSwan IKEv2 certificate manager with a CLI, read-only web panel and controlled root helper."
-          : "neca：面向 strongSwan IKEv2 的证书管理工具。CLI、只读 Web 面板、受控 root helper。");
+          ? "Neko's Efficient Certificate Administrator (neca): a lightweight strongSwan IKEv2 certificate manager with a CLI, read-only web panel and controlled root helper."
+          : "Neko's Efficient Certificate Administrator（neca）：面向 strongSwan IKEv2 的证书管理工具。CLI、只读 Web 面板、受控 root helper。");
         toggle.textContent = lang === "en" ? "中文" : "EN";
         toggle.setAttribute("aria-label", lang === "en" ? "Switch to Chinese" : "Switch to English");
         try { localStorage.setItem("neca_home_lang", lang); } catch (e) {}

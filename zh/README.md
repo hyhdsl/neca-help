@@ -1,7 +1,13 @@
 # neca 帮助中心
 
-> 适用于 **neca v0.4.1**（2026-11-15）。neca 是 strongSwan IKEv2 用户证书管理工具，
-> 不是 VPN 服务端本身；它负责签发、吊销、重签证书，生成客户端包，并维护 CRL。
+> 适用于 **neca v0.4.1**（2026-11-15）。**Neko's Efficient Certificate Administrator（neca）** 是 strongSwan IKEv2 用户证书管理工具，不是 VPN 服务端本身；它负责签发、吊销、重签证书，生成客户端包，并维护 CRL。
+
+## 适用场景
+
+- 单机或少量 strongSwan IKEv2 网关，管理员希望用 CLI 维护证书。
+- 需要默认只读 Web、清晰权限边界、审计与 Docker 部署。
+- 不需要多租户、数据库或复杂高可用集群的部署。
+- **不适合**：大规模 PKI/多租户、无人值守自动签发，或未经访问设计直接暴露公网。
 
 ## 先看这里
 

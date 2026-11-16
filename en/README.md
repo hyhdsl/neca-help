@@ -1,7 +1,13 @@
 # neca Help Center
 
-> Applies to **neca v0.4.1** (2026-11-15). neca manages strongSwan IKEv2 user
-> certificates and client packages; it is not the VPN server itself.
+> Applies to **neca v0.4.1** (2026-11-15). **Neko's Efficient Certificate Administrator (neca)** manages strongSwan IKEv2 user certificates and client packages; it is not the VPN server itself.
+
+## When to use neca
+
+- A single or small number of strongSwan IKEv2 gateways maintained from the CLI.
+- A deployment that wants a read-only web panel by default, clear privilege boundaries, audit logs and Docker packaging.
+- A setup that does **not** need multi-tenancy, a database or a complex HA cluster.
+- **Not suitable for**: large-scale or multi-tenant PKI, unattended automatic issuance, or direct public exposure without an access design.
 
 ## Start here
 
