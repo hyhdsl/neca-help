@@ -125,7 +125,7 @@ neca trash restore <ID>
 neca trash purge <ID>
 ~~~
 
-`trash purge` 需要一次 Y/N（默认 N）；后台自动化可用 `--yes`。不再输入 `PURGE <CN>`，也不承诺 SSD/快照/备份上的安全擦除。清理前先备份：
+`trash purge` 需要一次 Y/N（默认 N）；后台自动化可用 `--yes`。保留期由 `trash.retention` 配置（默认 0=不限时），可用 `neca trash purge --expired` 清理过期条目。不再输入 `PURGE <CN>`，也不承诺 SSD/快照/备份上的安全擦除。清理前先备份：
 
 ~~~bash
 tar -C /opt/ipsec -czf /root/ipsec-before-trash-$(date +%Y%m%d-%H%M%S).tar.gz \
