@@ -95,7 +95,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`. `web.listen`, `adminCNs` and passkey changes
 still require a Web restart.
 
-Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. They do not support physical purge, package or settings editing. The helper checks `readOnly` independently; hiding buttons
+Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. Settings editing is limited to the allowlisted high-risk fields (readOnly/idleTimeout/export); physical purge and package are not supported. The helper checks `readOnly` independently; hiding buttons
 is not a security boundary.
 
 ## CLI
