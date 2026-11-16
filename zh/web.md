@@ -98,7 +98,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`。`web.listen`、`adminCNs`、passkey 变更仍需
 重启 web 容器。
 
-Web 写操作仅包含 issue/revoke/unrevoke/reissue；**不支持 delete/package/设置编辑**。
+Web 写操作包含 issue/revoke/unrevoke/reissue，以及 M11.1 的“移入回收站”；**不支持物理 purge、package 或设置编辑**。
 helper 的 `readOnly` 检查是第二道闸门，不能只依赖 UI 隐藏按钮。
 
 ## 管理命令
