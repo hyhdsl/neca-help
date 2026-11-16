@@ -16,7 +16,7 @@
 启用 Web 时的典型权限：
 
 ~~~text
-/opt/ipsec/neca.json              root:neca-web 0640
+/opt/ipsec/config/neca.json       root:neca-web 0640
 /opt/ipsec/web-secrets/           root:neca-web 0710
   session.key                     root:neca-web 0640
   password.hash                   root:neca-web 0640
@@ -54,6 +54,19 @@ Web 进程固定 UID/GID 10001，非 root。CLI 以 root 执行 CA 操作。lite
 - 轮换 `session.key` 会使现有会话失效；在维护窗口执行。
 - 管理员密码通过 `neca web hash-password` 生成哈希，不要写进 `neca.env`。
 - 若部署流程生成了初始密码文件，它只应短期存在；首次登录后删除或转移到密码管理器。
+
+## 回收站与安全删除（规划）
+
+- 计划中的 Web 删除只把已吊销证书**移入回收站**，物理清理只能由后台确认。
+- 回收站默认不限时保存；保留期可由用户配置；恢复已吊销证书不会自动取消吊销状态。
+- 后台 purge 需要二次确认。
+- **不承诺安全擦除**：SSD、文件系统快照、备份和对象存储副本可能保留数据；回收站只用于隔离与防误删。
+
+## 高风险设置（规划）
+
+- 高风险安全设置默认只允许后台修改；Web 设置页只读展示。
+- 即使后台开启 Web 修改开关，前后台修改高风险设置也需要 Y/N 二次确认、重新认证、CSRF 与审计。
+- 建议 `adminCNs`、passkey 与 helper 相关设置永远保持后台-only。
 
 ## 备份安全
 
