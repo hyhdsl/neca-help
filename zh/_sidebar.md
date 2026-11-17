@@ -2,6 +2,7 @@
 - [English](https://neca.nekobiglazyer.work/en/)
 - [帮助中心](README.md)
 - [快速开始](getting-started.md)
+- [常用命令速查](cheatsheet.md)
 - [安装、升级与回滚](install.md)
 - [证书管理](certificates.md)
 - [平台包与客户端安装](packages.md)
@@ -15,6 +16,6 @@
 
 ---
 
-- 版本：v0.4.1
+- 版本：v0.7.0
 - [项目仓库](https://github.com/hyhdsl/neca)
 - [问题反馈](https://github.com/hyhdsl/neca/issues)

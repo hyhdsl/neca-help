@@ -11,6 +11,26 @@
 Release 也提供 linux amd64/arm64 二进制；但 lite 依赖 `openssl` 与 Docker CLI，
 容器化部署更省事。生产请固定版本标签，不要依赖 `latest`。
 
+## 二进制安装（Linux CLI）
+
+本路径已在 Debian bookworm 容器中验证下载、校验、安装和 `--version`/`help`；
+它只安装 lite CLI，不启动 Web。完整证书操作仍需按部署文档准备配置、PKI 和 OpenSSL；
+需要 Web 或 helper 时使用下面的 Docker Compose 方式。
+
+~~~bash
+VERSION=v0.7.0
+curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
+curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
+grep ' neca-linux-amd64$' checksums.txt > /tmp/neca-checksum
+sha256sum -c /tmp/neca-checksum
+sudo install -m 0755 neca-linux-amd64 /usr/local/bin/neca
+neca --version
+neca help
+~~~
+
+arm64 主机把 `neca-linux-amd64` 换成 `neca-linux-arm64`。安装前请确认 `openssl` 可用；
+证书写入和 Docker 运维所需配置仍以完整部署文档为准。
+
 ## 1. 准备目录与文件
 
 在服务器上：
@@ -52,14 +72,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 或先拉取固定版本镜像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.4.1
+docker pull ghcr.io/hyhdsl/neca:v0.7.0
 ~~~
 
 ## 4. 可选：启动只读 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.1 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.7.0 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -94,8 +114,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 然后：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.4.1
-docker pull ghcr.io/hyhdsl/neca-web:v0.4.1
+docker pull ghcr.io/hyhdsl/neca:v0.7.0
+docker pull ghcr.io/hyhdsl/neca-web:v0.7.0
 # 更新 compose 中的镜像标签，或使用 deploy 目录中的当前版本
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
