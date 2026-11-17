@@ -121,7 +121,7 @@ neca web lockdown
 - `web lockdown`：只停止明确命名的 `web` 与 `web-helper`，不触碰 SSH/strongSwan/VPN；默认 Y/N 为 N。
 - `web export on/off`：默认关闭；只提供 issued/revoked CSV。关闭时 `/export/*.csv` 与 `/api/v1/export/*.csv` 返回 404。
 
-侧栏“设置”可展开，下分为“通用”“安全”“关于”。通用页使用下拉框选择主题与语言；关于页展示版本、仓库、帮助、许可证与版权；右上角重复的下载中心按钮已移除。高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在“安全”页用下拉框修改 readOnly、idleTimeout 与 CSV 导出；点击“保存设置”后，在确认对话框重新输入管理员密码、勾选 Y 并确认保存。未保存离开页面会触发浏览器原生提醒。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
+侧栏“设置”可展开，下分为“通用”“安全”“关于”。通用页使用下拉框选择主题与语言；关于页展示版本、仓库、帮助、许可证与版权；右上角重复的下载中心按钮已移除。高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在“安全”页用下拉框修改 readOnly、idleTimeout 与 CSV 导出；点击“保存设置”后，在确认对话框重新输入管理员密码、勾选 Y 并确认保存。未保存离开页面会触发浏览器原生提醒。把只读改为“是”会立即关闭 Web 写模式和高风险修改，页面随后显示只读状态；恢复写模式只能由后台 root 执行。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
 
 `readonly off` 只允许 root，并检查：
 
