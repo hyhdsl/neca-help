@@ -3,10 +3,10 @@
 ## 源码与文档
 
 - 主仓库：<https://github.com/hyhdsl/neca>
-- 开发文档：<https://github.com/hyhdsl/neca/blob/main/docs/neca-development.md>
-- Web 设计：<https://github.com/hyhdsl/neca/blob/main/docs/web-panel.md>
-- Web 实施：<https://github.com/hyhdsl/neca/blob/main/docs/web-panel-development.md>
-- 部署文档：<https://github.com/hyhdsl/neca/blob/main/docs/deploy.md>
+- 开发文档：<https://github.com/hyhdsl/neca/blob/main/docs/development/neca-development.md>
+- Web 设计：<https://github.com/hyhdsl/neca/blob/main/docs/evaluations/web-panel.md>
+- Web 实施：<https://github.com/hyhdsl/neca/blob/main/docs/evaluations/web-panel-development.md>
+- 部署文档：<https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md>
 - 帮助文档源码：<https://github.com/hyhdsl/neca/tree/main/docs/help>
 
 ## 本地构建
@@ -78,7 +78,7 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 
 - 开发期暂不接受外部 Pull Request；
 - 问题请提交 <https://github.com/hyhdsl/neca/issues>；
-- 修改请先 fork，并遵守 AGPL 与 [二次开发要求](https://github.com/hyhdsl/neca/blob/main/docs/SECONDARY-DEVELOPMENT.md)；
+- 修改请先 fork，并遵守 AGPL 与 [二次开发要求](https://github.com/hyhdsl/neca/blob/main/docs/development/SECONDARY-DEVELOPMENT.md)；
 - 安全问题时不要公开粘贴私钥、密码或可利用细节，先联系维护者。
 
 ## 许可

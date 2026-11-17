@@ -133,5 +133,5 @@ docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web
 
 ## 深入阅读
 
-- [服务器部署（完整版）](https://github.com/hyhdsl/neca/blob/main/docs/deploy.md)
+- [服务器部署（完整版）](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
 - [安全、权限与备份](security.md)

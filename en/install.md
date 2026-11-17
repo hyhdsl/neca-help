@@ -130,5 +130,5 @@ Back up before uninstalling.
 
 ## Deep dive
 
-- [Full server deployment guide](https://github.com/hyhdsl/neca/blob/main/docs/deploy.md)
+- [Full server deployment guide](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
 - [Security, permissions and backups](security.md)

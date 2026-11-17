@@ -168,4 +168,4 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 
 - [故障排查](troubleshooting.md)
 - [安全、权限与备份](security.md)
-- [服务器部署完整版](https://github.com/hyhdsl/neca/blob/main/docs/deploy.md)
+- [服务器部署完整版](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
