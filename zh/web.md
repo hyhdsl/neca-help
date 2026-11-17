@@ -121,7 +121,7 @@ neca web lockdown
 - `web lockdown`：只停止明确命名的 `web` 与 `web-helper`，不触碰 SSH/strongSwan/VPN；默认 Y/N 为 N。
 - `web export on/off`：默认关闭；只提供 issued/revoked CSV。关闭时 `/export/*.csv` 与 `/api/v1/export/*.csv` 返回 404。
 
-`/settings` 设置页：语言/主题可直接调整；高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在设置页修改 readOnly、idleTimeout 与 CSV 导出；必须重新输入管理员密码、勾选 Y 确认并携带 CSRF。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
+侧栏“设置”下分为“通用”“安全”“关于”。通用页集中放置主题与语言切换；高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在“安全”页修改 readOnly、idleTimeout 与 CSV 导出；必须重新输入管理员密码、勾选 Y 确认并携带 CSRF。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
 
 `readonly off` 只允许 root，并检查：
 
@@ -151,7 +151,7 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 - 页面支持 zh-CN / en-US 切换，使用 `neca_lang` Cookie。
 - 默认语言跟随 `neca.json` 的 `language`。
 - 支持浅色/深色主题，选择保存在浏览器 localStorage。
-- 主题与语言切换不改变服务端权限或只读状态。
+- 主题与语言切换位于“设置 → 通用”，不改变服务端权限或只读状态。
 
 ## 安全边界
 

@@ -118,7 +118,7 @@ neca web lockdown
 - `web lockdown`: stops only the explicit `web` and `web-helper` services; it never touches SSH, strongSwan or VPN.
 - `web export on/off`: disabled by default; only issued/revoked CSV. When disabled, `/export/*.csv` and `/api/v1/export/*.csv` return 404.
 
-The `/settings` page lets you change language/theme directly. High-risk settings are read-only by default. If the backend sets `web.allowHighRiskSettings=true` and Web/helper are writable, the page can change readOnly, idleTimeout and CSV export; it requires re-entering the administrator password, a Y confirmation and CSRF. `adminCNs`, passkey and helper settings are not editable from Web.
+The sidebar Settings group contains General, Security and About. Theme and language controls live on General. High-risk settings are read-only by default. If the backend sets `web.allowHighRiskSettings=true` and Web/helper are writable, the Security page can change readOnly, idleTimeout and CSV export; it requires re-entering the administrator password, a Y confirmation and CSRF. `adminCNs`, passkey and helper settings are not editable from Web.
 
 `readonly off` requires root, a healthy helper, correct socket permissions, `ca.key` and
 a successful atomic config write. It must not leave a half-enabled state.
@@ -142,7 +142,7 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
 - zh-CN/en-US switching is available via the `neca_lang` cookie.
 - The default language follows `neca.json` `language`.
 - Light/dark theme is stored in browser localStorage.
-- Language and theme do not change server permissions or read-only state.
+- Theme and language controls live under Settings → General; they do not change server permissions or read-only state.
 
 ## Security boundaries
 
