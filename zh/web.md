@@ -98,7 +98,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`。`web.listen`、`adminCNs`、passkey 变更仍需
 重启 web 容器。
 
-Web 写操作包含 issue/revoke/unrevoke/reissue，以及 M11.1 的“移入回收站”；设置页仅支持白名单高风险项（readOnly/idleTimeout/导出）；**不支持物理 purge 或 package**。
+Web 写操作包含 issue/revoke/unrevoke/reissue，以及 M11.1 的“移入回收站”；签发页平台使用勾选框（windows/linux/macos/android/ios），设置页仅支持白名单高风险项（readOnly/idleTimeout/导出）；**不支持物理 purge 或 package**。
 helper 的 `readOnly` 检查是第二道闸门，不能只依赖 UI 隐藏按钮。
 
 ## 管理命令
@@ -121,7 +121,7 @@ neca web lockdown
 - `web lockdown`：只停止明确命名的 `web` 与 `web-helper`，不触碰 SSH/strongSwan/VPN；默认 Y/N 为 N。
 - `web export on/off`：默认关闭；只提供 issued/revoked CSV。关闭时 `/export/*.csv` 与 `/api/v1/export/*.csv` 返回 404。
 
-侧栏“设置”可展开，下分为“通用”“安全”“关于”。通用页集中放置主题与语言切换；高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在“安全”页修改 readOnly、idleTimeout 与 CSV 导出；必须重新输入管理员密码、勾选 Y 确认并携带 CSRF。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
+侧栏“设置”可展开，下分为“通用”“安全”“关于”。通用页使用下拉框选择主题与语言；高风险设置默认只读。若后台在配置中设置 `web.allowHighRiskSettings=true`，且 Web/helper 可写，可在“安全”页修改 readOnly、idleTimeout 与 CSV 导出；必须重新输入管理员密码、勾选 Y 确认并携带 CSRF。`adminCNs`、passkey 与 helper 设置不支持 Web 修改。
 
 `readonly off` 只允许 root，并检查：
 

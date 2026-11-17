@@ -95,7 +95,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`. `web.listen`, `adminCNs` and passkey changes
 still require a Web restart.
 
-Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. Settings editing is limited to the allowlisted high-risk fields (readOnly/idleTimeout/export); physical purge and package are not supported. The helper checks `readOnly` independently; hiding buttons
+Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. The issue page uses checkboxes for windows/linux/macos/android/ios. Settings editing is limited to the allowlisted high-risk fields (readOnly/idleTimeout/export); physical purge and package are not supported. The helper checks `readOnly` independently; hiding buttons
 is not a security boundary.
 
 ## CLI
@@ -118,7 +118,7 @@ neca web lockdown
 - `web lockdown`: stops only the explicit `web` and `web-helper` services; it never touches SSH, strongSwan or VPN.
 - `web export on/off`: disabled by default; only issued/revoked CSV. When disabled, `/export/*.csv` and `/api/v1/export/*.csv` return 404.
 
-The expandable sidebar Settings group contains General, Security and About. Theme and language controls live on General. High-risk settings are read-only by default. If the backend sets `web.allowHighRiskSettings=true` and Web/helper are writable, the Security page can change readOnly, idleTimeout and CSV export; it requires re-entering the administrator password, a Y confirmation and CSRF. `adminCNs`, passkey and helper settings are not editable from Web.
+The expandable sidebar Settings group contains General, Security and About; General uses dropdowns for theme and language. Theme and language controls live on General. High-risk settings are read-only by default. If the backend sets `web.allowHighRiskSettings=true` and Web/helper are writable, the Security page can change readOnly, idleTimeout and CSV export; it requires re-entering the administrator password, a Y confirmation and CSRF. `adminCNs`, passkey and helper settings are not editable from Web.
 
 `readonly off` requires root, a healthy helper, correct socket permissions, `ca.key` and
 a successful atomic config write. It must not leave a half-enabled state.
