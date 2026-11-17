@@ -1,39 +1,29 @@
 # 安装、升级与回滚
 
-## 选择部署方式
+> 本页只包含两种安装路径：**Docker Compose（方式 A）** 和 **Linux 二进制（方式 B）**。
+> 请选择一种路径，不要混用。下面的 A1–A6 / B1–B4 标注了每条路径的起止位置；
+> 升级、回滚与卸载属于安装后的共用流程（C1–C3）。
 
-推荐使用 Docker Compose：
+## 0. 总流程边界
 
-- **lite**：只运行 `neca` CLI，适合只做证书管理。
-- **neca-web**：额外运行 Web 面板，默认只读。
-- **web-write**：额外运行 root helper，允许在 Web 中签发/吊销/重签。
+| 路径 | 从哪里开始 | 到哪里结束 | 需要什么 |
+|---|---|---|---|
+| 方式 A：Docker Compose | **A1 准备目录与文件** | **A6 验证 Docker 安装** | Docker、Compose、仓库中的 deploy 文件 |
+| 方式 B：Linux 二进制 | **B1 下载与校验** | **B4 检查配置/PKI 前置** | Linux amd64/arm64、OpenSSL；仅 CLI |
+| 共用流程 | **C1 升级** | **C3 卸载** | 已完成的 A 或 B |
 
-Release 也提供 linux amd64/arm64 二进制；但 lite 依赖 `openssl` 与 Docker CLI，
-容器化部署更省事。生产请固定版本标签，不要依赖 `latest`。
+**整页起点**：先读本节并选择 A 或 B。
 
-## 二进制安装（Linux CLI）
+**整页终点**：完成 A6 或 B4。
+**不要混用**：Docker 方式从 A1 到 A6；二进制方式从 B1 到 B4。二进制方式不包含 Web/helper。
 
-本路径已在 Debian bookworm 容器中验证下载、校验、安装和 `--version`/`help`；
-它只安装 lite CLI，不启动 Web。完整证书操作仍需按部署文档准备配置、PKI 和 OpenSSL；
-需要 Web 或 helper 时使用下面的 Docker Compose 方式。
+## 方式 A：Docker Compose 安装（A1–A6）
 
-~~~bash
-VERSION=v0.7.0
-curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
-curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
-grep ' neca-linux-amd64$' checksums.txt > /tmp/neca-checksum
-sha256sum -c /tmp/neca-checksum
-sudo install -m 0755 neca-linux-amd64 /usr/local/bin/neca
-neca --version
-neca help
-~~~
+**路径范围**：A1–A6；A5 是可选的 Web 写能力。完成 A6 即完成 Docker 安装。
 
-arm64 主机把 `neca-linux-amd64` 换成 `neca-linux-arm64`。安装前请确认 `openssl` 可用；
-证书写入和 Docker 运维所需配置仍以完整部署文档为准。
+### A1. 准备目录与文件
 
-## 1. 准备目录与文件
-
-在服务器上：
+在仓库根目录（或已取得 deploy 文件）执行：
 
 ~~~bash
 install -d -m 0755 /opt/ipsec
@@ -50,9 +40,10 @@ install -m 0600 deploy/neca.json.example /opt/ipsec/config/neca.json
 NECA_CONFIG=/opt/ipsec/config/neca.json
 ~~~
 
-真实 `SERVER_ID`、`ORG`、`CA_CN` 写入 `/opt/ipsec/config/neca.json`，不要提交仓库。配置目录单独挂载给 Web，SIGHUP 才能看到原子替换后的新文件。
+真实 `SERVER_ID`、`ORG`、`CA_CN` 写入 `/opt/ipsec/config/neca.json`，不要提交仓库。
+配置目录单独挂载给 Web，SIGHUP 才能看到原子替换后的新文件。
 
-## 2. 安装命令包装
+### A2. 安装命令包装
 
 ~~~bash
 install -m 0755 deploy/neca-wrapper.sh /usr/local/bin/neca
@@ -62,7 +53,7 @@ neca config validate
 
 包装命令会在非交互环境自动使用 `docker compose run -T`，并把 `NECA_LANG` 传入容器。
 
-## 3. 启动 lite
+### A3. 启动 lite
 
 ~~~bash
 cd /opt/ipsec
@@ -75,7 +66,7 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 docker pull ghcr.io/hyhdsl/neca:v0.7.0
 ~~~
 
-## 4. 可选：启动只读 Web
+### A4. 可选：启动只读 Web
 
 ~~~bash
 cd /opt/ipsec
@@ -89,20 +80,82 @@ docker compose -f docker-compose.neca.yml --profile web up -d web
 
 默认端口是 `127.0.0.1:18080`。修改 `web.listen` 后必须重启 `neca-web`。
 
-## 5. 可选：开启 Web 写能力
+### A5. 可选：开启 Web 写能力
 
 ~~~bash
 cd /opt/ipsec
 docker compose -f docker-compose.neca.yml --profile web --profile web-write up -d web web-helper
 neca web status
 neca web readonly off
-docker kill --signal=HUP neca-web
 ~~~
 
 写能力不是默认值。`readonly off` 需要 helper 可用、socket 权限正确且 CA 私钥存在。
 详见 [Web 面板](web.md) 与 [安全、权限与备份](security.md)。
 
-## 6. 升级
+### A6. 验证 Docker 安装（方式 A 结束）
+
+完成 A6 后，Docker 安装路径结束：
+
+~~~bash
+neca version
+neca config validate
+neca web status
+neca doctor
+~~~
+
+可选 Web 已启动时，通过 OpenSSH 本地转发打开面板并确认登录页、证书列表和下载入口。
+
+## 方式 B：Linux 二进制安装（B1–B4）
+
+**路径范围**：B1–B4。只安装 lite CLI，不含 Web/helper；完整证书操作仍需配置、PKI 和 OpenSSL。
+
+### B1. 下载与校验二进制
+
+~~~bash
+VERSION=v0.7.0
+curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
+curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
+grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
+sha256sum -c /tmp/neca-checksum
+~~~
+
+arm64 主机把 `neca-linux-amd64` 换成 `neca-linux-arm64`。
+本路径已在 Debian bookworm 容器中验证下载、校验、安装、`--version` 和 `help`；
+尚未在生产主机直接替换 Docker 部署。
+
+### B2. 安装到系统路径
+
+~~~bash
+sudo install -m 0755 neca-linux-amd64 /usr/local/bin/neca
+~~~
+
+确认 `openssl` 可用。二进制方式不提供 Web 面板；需要 Web/helper 时返回方式 A。
+
+### B3. 验证二进制安装
+
+~~~bash
+neca --version
+neca help
+neca --lang en-US help
+~~~
+
+### B4. 检查配置与 PKI 前置（方式 B 结束）
+
+二进制只负责 CLI 本身；在签发/吊销前，按 [安全、权限与备份](security.md) 准备配置、
+PKI 目录和 `openssl`。可先运行：
+
+~~~bash
+neca config validate
+neca doctor
+~~~
+
+完成 B4 后，二进制安装路径结束。
+
+## 共用流程：升级、回滚与卸载（C1–C3）
+
+**路径范围**：C1–C3；从升级开始，到卸载结束。以下流程适用于已完成的 A 或 B。
+
+### C1. 升级
 
 升级前备份：
 
@@ -111,15 +164,15 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
   pki clients swanctl neca.json web-secrets
 ~~~
 
-然后：
+Docker 方式：更新 compose 中的镜像标签后执行：
 
 ~~~bash
 docker pull ghcr.io/hyhdsl/neca:v0.7.0
 docker pull ghcr.io/hyhdsl/neca-web:v0.7.0
-# 更新 compose 中的镜像标签，或使用 deploy 目录中的当前版本
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
+二进制方式：重新执行 B1–B3，替换 `/usr/local/bin/neca`。
 修改 `readOnly` / `idleTimeout` 后发送 SIGHUP：
 
 ~~~bash
@@ -128,20 +181,20 @@ docker kill --signal=HUP neca-web
 
 只执行 `up -d` 不会让已运行的 Web 进程重新读取配置；`web.listen` 等监听类配置仍需重启。
 
-## 7. 回滚
+### C2. 回滚
 
 1. 停止 Web/helper；
 2. 恢复备份的 `pki`、`clients`、`swanctl`、`neca.json`、`web-secrets`；
-3. 把 compose 镜像标签切回上一个版本；
-4. 重新启动对应容器。
+3. 把 compose 镜像标签切回上一个版本，或恢复旧二进制；
+4. 重新启动对应容器或执行 `neca --version` 验证。
 
 ~~~bash
-docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web stop web
+docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web stop web web-helper
 ~~~
 
 lite 与 neca-web 必须使用同一版本；不要混用旧 CLI 与新 Web。
 
-## 8. 卸载
+### C3. 卸载（共用流程结束）
 
 停止并删除容器不会删除 `/opt/ipsec` 数据。确认不再需要 Web 时：
 
@@ -149,7 +202,7 @@ lite 与 neca-web 必须使用同一版本；不要混用旧 CLI 与新 Web。
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web-write down
 ~~~
 
-不要执行会删除数据目录的命令；卸载前先备份。
+二进制安装的 CLI 可手动删除 `/usr/local/bin/neca`；不要执行会删除数据目录的命令，卸载前先备份。
 
 ## 深入阅读
 
