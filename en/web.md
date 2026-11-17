@@ -95,7 +95,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`. `web.listen`, `adminCNs` and passkey changes
 still require a Web restart.
 
-Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. The issue page uses checkboxes for windows/linux/macos/android/ios. Settings editing is limited to the allowlisted high-risk fields (readOnly/idleTimeout/export); physical purge and package are not supported. The helper checks `readOnly` independently; hiding buttons
+Web writes support issue/revoke/unrevoke/reissue and the M11.1 recycle-bin move. The issue page uses checkboxes for windows/linux/macos/android/ios and a separate opt-in for one-click install scripts. Scripts are off by default, supported only on Windows/Linux/macOS, and decided per issuance instead of the global NECA_INSTALLERS setting. Settings editing is limited to the allowlisted high-risk fields (readOnly/idleTimeout/export); physical purge and package are not supported. The helper checks `readOnly` independently; hiding buttons
 is not a security boundary.
 
 ## CLI
