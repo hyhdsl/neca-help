@@ -2,6 +2,7 @@
 - [中文](https://neca.nekobiglazyer.work/zh/)
 - [Help Center](README.md)
 - [Quick start](getting-started.md)
+- [Command cheat sheet](cheatsheet.md)
 - [Install, upgrade and rollback](install.md)
 - [Certificate management](certificates.md)
 - [Web panel](web.md)
@@ -11,7 +12,7 @@
 
 ---
 
-- Version: v0.4.1
+- Version: v0.7.0
 - [Project](https://github.com/hyhdsl/neca)
 - [Issues](https://github.com/hyhdsl/neca/issues)
 - [中文完整文档](https://neca.nekobiglazyer.work/)
