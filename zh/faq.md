@@ -71,7 +71,7 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 ## 旧 bash 脚本还能用吗？
 
 保留在 `legacy/`，用于回退、影子测试和历史参考。新部署应使用 neca；旧脚本的
-使用说明见 [legacy-vpn-cert-manager.md](https://github.com/hyhdsl/neca/blob/main/docs/development/legacy-vpn-cert-manager.md)。
+旧脚本的迁移与回滚说明见仓库 legacy/ 目录与 v0.5.0 迁移表（内部档案，不随仓库发布）。
 
 ## 为什么外部 PR 暂不接受？
 

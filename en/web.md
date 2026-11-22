@@ -41,7 +41,7 @@ In `/opt/ipsec/config/neca.json`:
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.7.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.0 ./init-web-secrets.sh
 ~~~
 
 The script asks for the administrator password interactively, creates `web-secrets/`,
@@ -160,4 +160,4 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
 
 - [Troubleshooting (Chinese)](../zh/troubleshooting.md)
 - [Security, permissions and backups](security.md)
-- [Full deployment guide](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
+- Deployment, upgrade and rollback are covered in the install guide.

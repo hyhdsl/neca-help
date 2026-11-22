@@ -63,14 +63,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 Pull a pinned image if needed:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.7.0
+docker pull ghcr.io/hyhdsl/neca:v1.0.0
 ~~~
 
 ### A4. Optional read-only Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.7.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.0 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -112,7 +112,7 @@ Certificate operations still require configuration, PKI and OpenSSL.
 ### B1. Download and verify the binary
 
 ~~~bash
-VERSION=v0.7.0
+VERSION=v1.0.0
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -167,8 +167,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 Docker path: update the compose image tags, then run:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.7.0
-docker pull ghcr.io/hyhdsl/neca-web:v0.7.0
+docker pull ghcr.io/hyhdsl/neca:v1.0.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.0.0
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -206,5 +206,5 @@ For the binary install, remove `/usr/local/bin/neca` manually. Back up before un
 
 ## Deep dive
 
-- [Full server deployment guide](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
+- Deployment, upgrade and rollback are covered in this install guide; internal design docs are kept by the maintainer and not published.
 - [Security, permissions and backups](security.md)

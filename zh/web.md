@@ -40,7 +40,7 @@ Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v0.4.1 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.0 ./init-web-secrets.sh
 ~~~
 
 脚本以交互方式读取管理员密码并创建 `web-secrets/`、`session.key`、
@@ -168,4 +168,4 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 
 - [故障排查](troubleshooting.md)
 - [安全、权限与备份](security.md)
-- [服务器部署完整版](https://github.com/hyhdsl/neca/blob/main/docs/development/deploy.md)
+- 部署、升级与回滚见安装页。
