@@ -1,6 +1,6 @@
 # neca 帮助中心
 
-> 适用于 **neca v1.0.0**。****Neko's Efficient Certificate Administrator（neca）** 是 strongSwan IKEv2 用户证书管理工具，不是 VPN 服务端本身；它负责签发、吊销、重签证书，生成客户端包，并维护 CRL。
+> 适用于 **neca v1.0.0**。**Neko's Efficient Certificate Administrator（neca）** 是 strongSwan IKEv2 用户证书管理工具，不是 VPN 服务端本身；它负责签发、吊销、重签证书，生成客户端包，并维护 CRL。
 
 > **AI 披露**：本项目代码编写、调试、测试、CI/构建/部署脚本、文档与帮助站内容由 AI 完成；人类维护者负责需求、审查、功能验收与生产操作。完整说明见 [AI-DISCLOSURE.md](https://github.com/hyhdsl/neca/blob/main/AI-DISCLOSURE.md)。AI 输出可能有误，请自行审查并在生产前验证。
 
@@ -14,6 +14,7 @@
 ## 先看这里
 
 - 第一次使用：从 [快速开始](getting-started.md) 走一遍最小流程；常用命令见 [常用命令速查](cheatsheet.md)。
+- 查全部子命令、参数与退出码：看 [子命令参考](commands.md)。
 - 已有服务器：看 [安装、升级与回滚](install.md) 和 [部署与日常运维](operations.md)。
 - 管理证书：看 [证书管理](certificates.md)。
 - 使用 Web 面板：看 [Web 面板](web.md)。

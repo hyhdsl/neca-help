@@ -57,8 +57,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 固定版本标签，不使用 `latest` 作为生产依赖：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v0.5.0
-docker pull ghcr.io/hyhdsl/neca-web:v0.5.0
+docker pull ghcr.io/hyhdsl/neca:v1.0.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.0.0
 ~~~
 
 升级前备份；升级后验证：

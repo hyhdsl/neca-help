@@ -92,4 +92,4 @@ neca --json cert list
 neca --dry-run cert issue alice --platforms windows
 ~~~
 
-> 生产部署、升级和回滚见 [安装、升级与回滚](install.md)；Web 权限与备份见 [安全、权限与备份](security.md)。
+> 完整参数与全部子命令见 [子命令参考](commands.md)；生产部署、升级和回滚见 [安装、升级与回滚](install.md)；Web 权限与备份见 [安全、权限与备份](security.md)。

@@ -14,6 +14,7 @@
 ## Start here
 
 - First run: [Quick start](getting-started.md); common commands: [Command cheat sheet](cheatsheet.md)
+- Full subcommand reference: [Command reference](commands.md)
 - Server install/upgrade: [Install, upgrade and rollback](install.md)
 - Certificates: [Certificate management](certificates.md)
 - Browser panel: [Web panel](web.md)
@@ -23,9 +24,7 @@
 
 ## English coverage
 
-This is the core English subset. Advanced pages such as package details, daily
-operations, troubleshooting and development are currently Chinese-only; use the
-language switch or [中文完整文档](https://neca.nekobiglazyer.work/zh/) for those pages.
+This is the core English subset. The full command reference is available in English. Advanced pages such as package details, daily operations, troubleshooting and development are currently Chinese-only; use the language switch or [中文完整文档](https://neca.nekobiglazyer.work/zh/) for those pages.
 
 ## Runtime forms
 

@@ -3,6 +3,7 @@
 * [帮助中心](README.md)
 * [快速开始](getting-started.md)
 * [常用命令速查](cheatsheet.md)
+* [子命令参考](commands.md)
 * [安装、升级与回滚](install.md)
 * [证书管理](certificates.md)
 * [平台包与客户端安装](packages.md)

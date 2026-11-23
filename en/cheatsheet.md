@@ -92,4 +92,4 @@ neca --json cert list
 neca --dry-run cert issue alice --platforms windows
 ~~~
 
-> Deployment, upgrades and rollback: [Install, upgrade and rollback](install.md). Web permissions and backups: [Security, permissions and backups](security.md).
+> Full arguments and all subcommands: [Command reference](commands.md). Deployment, upgrades and rollback: [Install, upgrade and rollback](install.md). Web permissions and backups: [Security, permissions and backups](security.md).
