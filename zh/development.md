@@ -4,7 +4,6 @@
 
 - 主仓库：<https://github.com/hyhdsl/neca>
 - 安装、升级与回滚：<https://neca.nekobiglazyer.work/zh/#/install>
-- 帮助文档源码：<https://github.com/hyhdsl/neca/tree/main/docs/help>
 - 内部开发文档与评估档案由维护者本地保存，不在仓库中发布
 
 ## 本地构建
@@ -47,30 +46,11 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 
 预览标签（`vX.Y.Z-preview.N`）不是稳定版；旧预览只保留源代码归档。
 
-## 帮助站点
+## 中英文文档
 
-本帮助站点的源文件在 `docs/help/`，使用 GitBook 兼容的
-`README.md` + `SUMMARY.md` 结构，并由 Docsify 在 GitHub Pages 上静态渲染。
+英文核心页位于帮助站的 English 入口；高阶页面暂保留中文，语言切换在页面右上角。
 
-当前 `neca.nekobiglazyer.work` 的 CNAME 指向 `hyhdsl.github.io`，由 Cloudflare
-代理提供 HTTPS；GitHub Pages 仍是源站。若关闭代理，需要等 GitHub Pages 自定义
-域证书签发后再强制 HTTPS。
-
-英文核心页位于 `docs/help/en/`；高阶页面暂保留中文，语言切换在页面右上角。
-
-为什么不是 GitBook SaaS：GitBook 的自定义域名属于付费功能，自动翻译也是付费
-附加项；本项目需要免费、可版本化、可自动部署的方案。保留 GitBook 结构是为了
-将来可以无缝导入。英文核心页当前为手工维护，避免按量翻译费用。
-
-站点发布仓库：
-<https://github.com/hyhdsl/neca-help>
-
-自定义域名：<https://neca.nekobiglazyer.work>
-
-发布方式：从已提交的 `docs/help` 运行 `bash scripts/publish-help-site.sh` 查看差异，
-确认后用 `bash scripts/publish-help-site.sh --yes` 推送；已安装 make 时也可用
-`make publish-help` / `make publish-help-apply`。脚本默认 dry-run，且不会发布
-工作区未提交的改动。
+英文核心页当前为手工维护，避免按量翻译费用。
 
 ## 贡献与反馈
 

@@ -53,5 +53,4 @@ default and is not exposed directly to the Internet.
 
 - Project: <https://github.com/hyhdsl/neca>
 - Release: <https://github.com/hyhdsl/neca/releases/tag/v1.0.0>
-- Help source: <https://github.com/hyhdsl/neca/tree/main/docs/help>
 - License: <https://github.com/hyhdsl/neca/blob/main/LICENSE>

@@ -43,6 +43,5 @@ lite 与 neca-web 使用同一版本标签；Web 默认只监听回环地址，�
 
 - 项目：<https://github.com/hyhdsl/neca>
 - 正式版：<https://github.com/hyhdsl/neca/releases/tag/v1.0.0>
-- 帮助文档源码：<https://github.com/hyhdsl/neca/tree/main/docs/help>
 - 许可：<https://github.com/hyhdsl/neca/blob/main/LICENSE>
 

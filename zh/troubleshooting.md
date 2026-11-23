@@ -158,15 +158,6 @@ Linux/macOS 脚本未覆盖所有发行版；先在测试机验证。
 - 查看 `docker compose logs` 与 `neca web status`；
 - 回滚时恢复旧镜像与备份，不要只回滚其中一个组件。
 
-## 帮助站点打不开
-
-帮助站点是独立的 GitHub Pages 静态站，不影响 neca 运行。若自定义域名异常：
-
-1. 检查 Cloudflare `neca` CNAME 是否指向 `hyhdsl.github.io`；
-2. 若启用 Cloudflare 代理，确认 Cloudflare 的 TLS 证书覆盖 `neca`，并检查 SSL/TLS 模式；
-3. 直接访问 `https://hyhdsl.github.io/neca-help/` 验证 GitHub Pages 源站（会跳转到自定义域名）；
-4. GitHub Pages 自定义域证书可能延迟；在证书就绪前可继续使用 Cloudflare 代理提供的 HTTPS。
-
 ## 仍然无法解决
 
 收集以下信息后提交 Issue：
