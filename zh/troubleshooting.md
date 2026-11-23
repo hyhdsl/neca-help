@@ -1,4 +1,4 @@
-# 故障排查
+# 🧰 故障排查
 
 先保存现场：日志、`neca web status`、`docker compose ps`、审计与最近变更。
 不要在公开渠道粘贴密码、Cookie、私钥或完整配置。

@@ -1,4 +1,4 @@
-# Quick start
+# ⚡ Quick start
 
 This page completes a minimal "list → issue → verify → download" flow. Run commands
 as root on the server. Replace `alice` with the real user identifier.
@@ -21,6 +21,10 @@ If `neca` is missing, install the wrapper:
 ~~~bash
 install -m 0755 deploy/neca-wrapper.sh /usr/local/bin/neca
 ~~~
+
+`deploy/neca-wrapper.sh` is in the repository's `deploy/` directory (the default
+location). The command above assumes you are at the repository root; otherwise
+replace it with the actual path to the file.
 
 ## 1. Inspect certificates
 

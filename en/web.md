@@ -1,4 +1,4 @@
-# Web panel
+# 🖥️ Web panel
 
 ## Purpose
 

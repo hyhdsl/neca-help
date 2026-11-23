@@ -1,4 +1,4 @@
-# Install, upgrade and rollback
+# 📦 Install, upgrade and rollback
 
 > This page has exactly two installation paths: **Docker Compose (Method A)** and **Linux binary (Method B)**.
 > Choose one path; do not mix them. A1–A6 and B1–B4 mark the start and end of each path.

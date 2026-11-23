@@ -1,4 +1,4 @@
-# 快速开始
+# ⚡ 快速开始
 
 本页用最短路径完成一次“查看证书 → 签发 → 验证 → 下载”的流程。命令均以 root
 在服务器执行；示例 CN 使用 `alice`，请替换成真实用户标识。
@@ -20,6 +20,9 @@ neca cert list
 ~~~bash
 install -m 0755 deploy/neca-wrapper.sh /usr/local/bin/neca
 ~~~
+
+`deploy/neca-wrapper.sh` 默认位于源码仓库根目录下的 `deploy/` 目录；上面的命令
+默认在仓库根目录执行。若当前目录不同，请改用该文件的实际路径。
 
 ## 1. 查看当前证书
 

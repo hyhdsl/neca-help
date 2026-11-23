@@ -1,4 +1,4 @@
-# Security, permissions and backups
+# 🛡️ Security, permissions and backups
 
 ## Asset sensitivity
 
