@@ -158,6 +158,22 @@ Linux/macOS 脚本未覆盖所有发行版；先在测试机验证。
 - 查看 `docker compose logs` 与 `neca web status`；
 - 回滚时恢复旧镜像与备份，不要只回滚其中一个组件。
 
+## Web 显示读取索引 permission denied
+
+如果 Web 报 `/opt/ipsec/pki/ca/index.txt: open ...: permission denied`，通常是 CA
+索引被重写后组变成了 root，而 Web 进程使用 UID/GID 10001（组 `neca-web`）：
+
+~~~bash
+chgrp neca-web /opt/ipsec/pki/ca /opt/ipsec/pki/ca/index.txt
+chmod 2755 /opt/ipsec/pki/ca
+chmod 0640 /opt/ipsec/pki/ca/index.txt
+docker exec neca-web sh -c 'head -c 1 /opt/ipsec/pki/ca/index.txt >/dev/null && echo OK'
+~~~
+
+`pki/ca` 的 setgid 位确保以后 CLI 原子重写 `index.txt` 时新文件仍继承
+`neca-web` 组。修正后刷新 Web 页面即可，不需要重启 Web 或 strongSwan；重新运行
+`init-web-secrets.sh` 也会修正该权限。
+
 ## 仍然无法解决
 
 收集以下信息后提交 Issue：

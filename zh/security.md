@@ -17,6 +17,8 @@
 
 ~~~text
 /opt/ipsec/config/neca.json       root:neca-web 0640
+/opt/ipsec/pki/ca/                root:neca-web 2755 (setgid)
+  index.txt                       root:neca-web 0640
 /opt/ipsec/web-secrets/           root:neca-web 0710
   session.key                     root:neca-web 0640
   password.hash                   root:neca-web 0640
@@ -26,6 +28,9 @@
 
 Web 进程固定 UID/GID 10001，非 root。CLI 以 root 执行 CA 操作。lite 容器挂载
 `docker.sock` 等价于宿主 root，必须限制谁能执行 `neca`。
+
+`pki/ca` 使用 setgid 与 `neca-web` 组：CLI 原子重写 `index.txt` 时，新文件仍继承
+该组；否则 Web 会报 `读取索引: ... permission denied`。
 
 ## Web 的边界
 

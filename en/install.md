@@ -77,6 +77,10 @@ docker compose -f docker-compose.neca.yml --profile web up -d web
 The script interactively asks for the administrator password and creates `/opt/ipsec/web-secrets/`.
 Save the password in a password manager. If your deployment generated a temporary initial password file, delete it after the first login.
 
+If `/opt/ipsec/pki/ca` already exists, the script also enables group inheritance and
+fixes `index.txt` to `root:neca-web 0640`, so the Web process does not fail with
+permission denied when reading the index.
+
 The default port is `127.0.0.1:18080`. Restart `neca-web` after changing `web.listen`.
 
 ### A5. Optional Web writes

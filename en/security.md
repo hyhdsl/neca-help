@@ -15,6 +15,8 @@
 
 ~~~text
 /opt/ipsec/config/neca.json       root:neca-web 0640
+/opt/ipsec/pki/ca/                root:neca-web 2755 (setgid)
+  index.txt                       root:neca-web 0640
 /opt/ipsec/web-secrets/           root:neca-web 0710
   session.key                     root:neca-web 0640
   password.hash                   root:neca-web 0640
@@ -25,6 +27,9 @@
 Web runs as UID/GID 10001, non-root. The CLI runs CA operations as root. The lite
 container mounts `docker.sock`, which is equivalent to host root; restrict who can run
 `neca`.
+
+`pki/ca` uses setgid and the `neca-web` group so atomic `index.txt` rewrites keep the
+group; otherwise the Web process reports `读取索引: ... permission denied`.
 
 ## Web boundary
 
