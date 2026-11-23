@@ -1,6 +1,6 @@
 # Command reference
 
-> Applies to **neca v1.0.0**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
+> Applies to **neca v1.0.1**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
 > Global options may appear anywhere on the command line; append `--help` to any command to see that level's usage.
 > Run write commands with `--dry-run` first.
 

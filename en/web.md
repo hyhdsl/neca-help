@@ -41,7 +41,7 @@ In `/opt/ipsec/config/neca.json`:
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.1 ./init-web-secrets.sh
 ~~~
 
 The script asks for the administrator password interactively, creates `web-secrets/`,
