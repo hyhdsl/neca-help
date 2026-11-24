@@ -1,5 +1,5 @@
-- [🏠 首页](https://neca.nekobiglazyer.work/)
-- [English](https://neca.nekobiglazyer.work/en/)
+- [🏠 首页](/ ':ignore :target=_self')
+- [English](/en/ ':ignore :target=_self')
 - [🏠 帮助中心](README.md)
 - [⚡ 快速开始](getting-started.md)
 - [📦 安装、升级与回滚](install.md)

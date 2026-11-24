@@ -170,3 +170,10 @@ body {
     white-space: normal;
   }
 }
+
+/* Desktop sidebar is always visible; the fixed toggle overlaps footer links. */
+@media (min-width: 769px) {
+  .sidebar-toggle {
+    display: none;
+  }
+}
