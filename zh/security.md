@@ -19,6 +19,7 @@
 /opt/ipsec/config/neca.json       root:neca-web 0640
 /opt/ipsec/pki/ca/                root:neca-web 2755 (setgid)
   index.txt                       root:neca-web 0640
+/opt/ipsec/downloads/             root:neca-web 2750 (setgid)
 /opt/ipsec/web-secrets/           root:neca-web 0710
   session.key                     root:neca-web 0640
   password.hash                   root:neca-web 0640
