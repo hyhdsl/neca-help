@@ -6,10 +6,14 @@
 - [🧭 Command cheat sheet](cheatsheet.md)
 - [📚 Command reference](commands.md)
 - [🔐 Certificate management](certificates.md)
+- [💻 Platform packages](packages.md)
 - [🖥️ Web panel](web.md)
 - [🔌 Web API (experimental)](api.md)
+- [⚙️ Deployment and operations](operations.md)
 - [🛡️ Security, permissions and backups](security.md)
+- [🧰 Troubleshooting](troubleshooting.md)
 - [❓ FAQ](faq.md)
+- [🛠️ Development, license and feedback](development.md)
 
 ---
 

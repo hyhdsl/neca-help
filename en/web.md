@@ -158,6 +158,6 @@ OpenSSH forwarding and has no public TLS/mTLS endpoint.
 
 ## Related
 
-- [Troubleshooting (Chinese)](../zh/troubleshooting.md)
+- [Troubleshooting](troubleshooting.md)
 - [Security, permissions and backups](security.md)
 - Deployment, upgrade and rollback are covered in the install guide.

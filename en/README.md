@@ -17,14 +17,17 @@
 - Full subcommand reference: [Command reference](commands.md)
 - Server install/upgrade: [Install, upgrade and rollback](install.md)
 - Certificates: [Certificate management](certificates.md)
+- Client packages: [Platform packages](packages.md)
 - Browser panel: [Web panel](web.md)
+- Daily operations: [Deployment and operations](operations.md)
 - Hardening and backups: [Security, permissions and backups](security.md)
-- Problems: [FAQ](faq.md)
+- Problems: [Troubleshooting](troubleshooting.md) and [FAQ](faq.md)
 - Automation: [Web API (experimental)](api.md)
+- Development: [Development, license and feedback](development.md)
 
 ## English coverage
 
-This is the core English subset. The full command reference is available in English. Advanced pages such as package details, daily operations, troubleshooting and development are currently Chinese-only; use the language switch or [中文完整文档](https://neca.nekobiglazyer.work/zh/) for those pages.
+English help pages cover the same topics as the Chinese documentation. Both are maintained manually; the Chinese documentation remains authoritative for behavior and release notes.
 
 ## 🧩 Runtime forms
 

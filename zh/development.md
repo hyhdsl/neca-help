@@ -21,6 +21,7 @@ docker compose run -T --rm dev make shadow
 | 命令 | 作用 |
 |---|---|
 | `make all` | gofmt + vet + ASCII + 测试 + 交叉编译 |
+| `make vuln` | govulncheck 依赖漏洞扫描（需联网） |
 | `make shadow` | 旧 bash 与 neca 的影子对比 |
 | `make check-locales` | zh-CN/en-US 语言包 key 一致性 |
 | `make docker` | 构建 lite 与 neca-web 镜像 |
@@ -48,9 +49,7 @@ lite 与 neca-web 共享同一 core 与数据目录；不发布 full 镜像。
 
 ## 中英文文档
 
-英文核心页位于帮助站的 English 入口；高阶页面暂保留中文，语言切换在页面右上角。
-
-英文核心页当前为手工维护，避免按量翻译费用。
+中文与英文帮助页已覆盖同一组主题，均为手工维护；中文文档是行为与发布说明的权威版本。语言切换在页面右上角。
 
 ## 贡献与反馈
 
