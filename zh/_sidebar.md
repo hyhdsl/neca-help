@@ -17,6 +17,6 @@
 
 ---
 
-- 版本：v1.0.1
+- 版本：v1.0.2
 - [项目仓库](https://github.com/hyhdsl/neca)
 - [问题反馈](https://github.com/hyhdsl/neca/issues)

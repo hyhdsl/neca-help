@@ -5,7 +5,7 @@
 - [中文文档](https://neca.nekobiglazyer.work/zh/)
 - [English docs](https://neca.nekobiglazyer.work/en/)
 - [项目仓库](https://github.com/hyhdsl/neca)
-- [v1.0.1 Release](https://github.com/hyhdsl/neca/releases/tag/v1.0.1)
+- [v1.0.2 Release](https://github.com/hyhdsl/neca/releases/tag/v1.0.2)
 
 默认只读；Web 写操作通过 root helper 的命令白名单执行。生产环境优先使用 OpenSSH
 本地转发，不直接暴露 Web 端口。

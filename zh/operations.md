@@ -32,8 +32,19 @@ docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web --profile web
 至少备份：
 
 ~~~bash
-tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
-  pki clients swanctl neca.json web-secrets
+umask 077
+tar -C /opt/ipsec -czf - config pki clients downloads swanctl web-secrets \
+  docker-compose.neca.yml .env neca.env \
+  | gpg --symmetric --cipher-algo AES256 \
+      --output /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz.gpg
+sha256sum /root/ipsec-backup-*.tar.gz.gpg
+~~~
+
+GPG 会交互式读取口令；不要把口令写进命令、Git 或普通文档。口令应存入密码管理器，
+备份文件至少保留一份在异机。解密验证：
+
+~~~bash
+gpg --decrypt /root/ipsec-backup-<时间>.tar.gz.gpg | tar -tzf - >/dev/null
 ~~~
 
 备份包含 CA 私钥与 Web 会话密钥，必须按最高敏感级别保护：
@@ -57,8 +68,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 固定版本标签，不使用 `latest` 作为生产依赖：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.0.1
-docker pull ghcr.io/hyhdsl/neca-web:v1.0.1
+docker pull ghcr.io/hyhdsl/neca:v1.0.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.0.2
 ~~~
 
 升级前备份；升级后验证：

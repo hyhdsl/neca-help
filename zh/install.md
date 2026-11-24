@@ -63,14 +63,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 或先拉取固定版本镜像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.0.1
+docker pull ghcr.io/hyhdsl/neca:v1.0.2
 ~~~
 
 ### A4. 可选：启动只读 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.1 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.2 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -115,7 +115,7 @@ neca doctor
 ### B1. 下载与校验二进制
 
 ~~~bash
-VERSION=v1.0.1
+VERSION=v1.0.2
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -163,15 +163,21 @@ neca doctor
 升级前备份：
 
 ~~~bash
-tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
-  pki clients swanctl neca.json web-secrets
+umask 077
+tar -C /opt/ipsec -czf - config pki clients downloads swanctl web-secrets \
+  docker-compose.neca.yml .env neca.env \
+  | gpg --symmetric --cipher-algo AES256 \
+      --output /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz.gpg
 ~~~
+
+GPG 口令不要写入命令、Git 或普通文档；恢复与更多细节见
+[部署与日常运维](operations.md#备份与恢复)。
 
 Docker 方式：更新 compose 中的镜像标签后执行：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.0.1
-docker pull ghcr.io/hyhdsl/neca-web:v1.0.1
+docker pull ghcr.io/hyhdsl/neca:v1.0.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.0.2
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
