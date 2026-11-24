@@ -118,3 +118,4 @@ Web 进程固定 UID/GID 10001，非 root。CLI 以 root 执行 CA 操作。lite
 - [ ] 备份与恢复演练完成
 - [ ] 审计日志与监控已接入
 - [ ] 版本标签固定，回滚镜像可用
+- [ ] `scripts/check-deploy-permissions.sh` 通过（或 `make check-permissions`）

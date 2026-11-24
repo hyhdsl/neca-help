@@ -73,7 +73,7 @@ curl -sS -b "$JAR" "$BASE/api/v1/capabilities" | jq .
 | 方法 | 路径 | 说明 |
 |---|---|---|
 | GET | `/api/v1/capabilities` | 只读/可写能力、helper 状态 |
-| GET | `/api/v1/certs?q=&status=` | 证书列表/搜索 |
+| GET | `/api/v1/certs?q=&status=&expiry=` | 证书列表/搜索；`expiry=30\|60\|90` 只看对应到期窗口 |
 | GET | `/api/v1/certs/{cn}` | 证书详情 |
 | GET | `/api/v1/certs/{cn}/verify` | p12 验证结果 |
 | GET | `/api/v1/downloads` | 下载列表 |
@@ -82,6 +82,8 @@ curl -sS -b "$JAR" "$BASE/api/v1/capabilities" | jq .
 | POST | `/api/v1/certs/{cn}/revoke` | 吊销 |
 | POST | `/api/v1/certs/{cn}/unrevoke` | 恢复吊销 |
 | POST | `/api/v1/certs/{cn}/reissue` | 重签 |
+
+`expiry` 只返回未来窗口内到期的 `valid` 证书；非法值会被忽略。
 
 不支持 delete、package 或设置编辑。
 

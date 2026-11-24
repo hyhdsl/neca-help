@@ -63,13 +63,25 @@ gpg --decrypt /root/ipsec-backup-<时间>.tar.gz.gpg | tar -tzf - >/dev/null
 5. 验证登录、证书列表与下载；
 6. 再决定是否开启写能力。
 
+## 部署权限检查
+
+升级、迁移或恢复后，在宿主机 root 执行：
+
+~~~bash
+NECA_ROOT=/opt/ipsec bash scripts/check-deploy-permissions.sh
+~~~
+
+等价入口：`make check-permissions`。脚本检查 CA 私钥、CA 索引、`pki/meta`、
+`clients`、`downloads`、配置、Web secrets、导出 CSV 与 `.env` 的权限/属主；
+发现世界可读的私钥、p12、元数据或导出文件时退出 1。
+
 ## 升级与回滚
 
 固定版本标签，不使用 `latest` 作为生产依赖：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.0.2
-docker pull ghcr.io/hyhdsl/neca-web:v1.0.2
+docker pull ghcr.io/hyhdsl/neca:v1.1.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.1.0
 ~~~
 
 升级前备份；升级后验证：

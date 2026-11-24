@@ -1,6 +1,6 @@
 # 子命令参考
 
-> 适用于 **neca v1.0.2**。本文覆盖全部内置子命令、参数、交互确认与退出码。
+> 适用于 **neca v1.1.0**。本文覆盖全部内置子命令、参数、交互确认与退出码。
 > 全局开关可放在命令任意位置；在任一命令后加 `--help` 可查看该层用法。
 > 写操作建议先加 `--dry-run`，确认输出后再实际执行。
 
@@ -87,6 +87,17 @@ neca --json cert list
 ~~~
 
 列出 CN、状态、序列号、平台、到期与备注，并显示 CRL 吊销条目数。不接受额外位置参数。
+
+### cert expiring
+
+~~~bash
+neca cert expiring
+neca cert expiring --days 60
+neca --json cert expiring --days 30
+~~~
+
+只读列出未来 N 天内到期的有效证书，默认 30 天；输出 CN、到期时间与剩余天数，
+并显示已过期证书数量。仅包含 `valid` 状态，已吊销/未索引不进入提醒。
 
 ### cert verify
 

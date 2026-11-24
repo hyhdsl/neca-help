@@ -40,7 +40,7 @@ Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.0.2 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.1.0 ./init-web-secrets.sh
 ~~~
 
 脚本以交互方式读取管理员密码并创建 `web-secrets/`、`session.key`、
@@ -74,6 +74,14 @@ ssh -L 18080:127.0.0.1:18080 root@<SERVER>
 - 空闲超时默认 30 分钟；登录后绝对上限 24 小时。
 - 登录失败有限流；写操作强制 CSRF。
 - 退出登录后会话失效；重启 necad 也会使内存会话失效（除非实现持久化）。
+
+## 到期概览
+
+登录后的概览页显示 30/60/90 天累计到期卡片；点击卡片进入证书页并应用对应
+到期窗口。证书页可组合搜索、状态与到期窗口筛选。
+
+概览与筛选都是只读操作：不会自动续期、吊销或修改证书。已吊销/未索引证书
+不进入到期提醒；已过期证书单独计数。
 
 ## 写能力（可选）
 
