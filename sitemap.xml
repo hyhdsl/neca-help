@@ -1,42 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://neca.nekobiglazyer.work/</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/getting-started.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/install.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/certificates.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/packages.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/web.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/api.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/operations.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/security.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/troubleshooting.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/faq.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh/development.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/getting-started.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/install.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/certificates.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/packages.md</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/operations.md</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/troubleshooting.md</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/development.md</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/web.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/security.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/faq.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/en/api.md</loc><lastmod>2026-11-15</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/getting-started.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/install.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/certificates.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/packages.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/web.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/api.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/operations.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/security.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/troubleshooting.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/faq.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/development.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/github-workflows.md</loc><lastmod>2026-11-27</lastmod></url>
-  <url><loc>https://neca.nekobiglazyer.work/zh-TW/shadow-comparison.md</loc><lastmod>2026-11-27</lastmod></url>
+  <!-- 仅收录实际 HTML 入口页；Docsify 的 #/... 文档共用同一 HTML 文档，不作为独立 URL 收录。 -->
+  <url><loc>https://neca.nekobiglazyer.work/</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://neca.nekobiglazyer.work/zh/</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://neca.nekobiglazyer.work/zh-TW/</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://neca.nekobiglazyer.work/en/</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
 </urlset>
