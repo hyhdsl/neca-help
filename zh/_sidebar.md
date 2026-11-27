@@ -1,5 +1,6 @@
 - [🏠 首页](/ ':ignore :target=_self')
 - [English](/en/ ':ignore :target=_self')
+- [繁體中文](/zh-TW/ ':ignore :target=_self')
 - [🏠 帮助中心](README.md)
 - [⚡ 快速开始](getting-started.md)
 - [📦 安装、升级与回滚](install.md)
@@ -14,9 +15,11 @@
 - [🧰 故障排查](troubleshooting.md)
 - [❓ 常见问题](faq.md)
 - [🛠️ 开发、许可与反馈](development.md)
+- [⚙️ GitHub 工作流](github-workflows.md)
+- [🔬 影子对比](shadow-comparison.md)
 
 ---
 
-- 版本：v1.1.2
+- 版本：v1.2.0
 - [项目仓库](https://github.com/hyhdsl/neca)
 - [问题反馈](https://github.com/hyhdsl/neca/issues)

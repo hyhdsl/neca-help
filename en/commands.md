@@ -1,6 +1,6 @@
 # Command reference
 
-> Applies to **neca v1.0.1**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
+> Applies to **neca v1.2.0**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
 > Global options may appear anywhere on the command line; append `--help` to any command to see that level's usage.
 > Run write commands with `--dry-run` first.
 
@@ -12,13 +12,13 @@
 | `--dry-run` | Print the write command that would run; do not execute or modify files |
 | `--yes` / `-y` | Skip the Y/N confirmation; the audit entry records explicit confirmation |
 | `-q` / `--quiet` | Suppress normal output; `--json` takes precedence |
-| `--lang zh-CN\|en-US` | Override the language for this invocation |
+| `--lang zh-CN\|zh-TW\|en-US` | Override the language for this invocation |
 | `--config <file>` | Use a specific config file (sets `NECA_CONFIG`) |
 | `--reload-mode creds\|restart` | Override CRL reload mode (sets `NECA_RELOAD_MODE`) |
 | `--version` / `-V` | Show version, commit, build time and platform |
 | `-h` / `--help` | Show help for the current level |
 
-`--dry-run` intercepts only state-changing commands: cert issue/reissue/revoke/unrevoke/trash/platform/package/export, pki index sync, pki downloads clean, trash restore/purge, and web readonly on/off, idle-timeout changes, export on/off, lock and lockdown. Read-only commands run normally.
+`--dry-run` intercepts only state-changing commands: cert issue/reissue/revoke/unrevoke/trash/platform/package/export, pki index sync, pki downloads clean, trash restore/purge, and web readonly on/off, idle-timeout changes, export on/off, lock and lockdown. Read-only commands run normally. `cert import` is the exception: its `--dry-run` performs read-only validation and prints the plan without writing.
 
 **Exit codes**: `0` success (warnings allowed); `1` usage error; `2` runtime failure; `3` precondition not met (certificate already exists, missing CA, helper unavailable, insufficient privileges).
 
@@ -42,6 +42,17 @@ neca cert issue --help
 ~~~
 
 Running `neca` with no arguments starts the interactive wizard; `neca wizard` opens it explicitly. Menu items 0–10 map to exit, issue, revoke, unrevoke, reissue, add platform, export issued, export revoked, list, index sync and move to recycle bin. The equivalent CLI command is printed before each action.
+
+### neca completion
+
+~~~bash
+source <(neca completion bash)
+source <(neca completion zsh)   # requires compinit
+neca completion fish | source
+neca completion powershell | Out-String | Invoke-Expression
+~~~
+
+Generates bash, zsh, fish and PowerShell completion scripts on stdout without changing shell configuration. Completion covers top-level commands, namespace subcommands, aliases and major flags; PowerShell also accepts the short name `pwsh`. For persistent installation, save the script in the completion directory used by your shell.
 
 ## config
 
@@ -96,7 +107,7 @@ neca cert verify alice
 neca cert verify alice bob
 ~~~
 
-Checks client p12 files: client-only content, expected algorithms and password length. With no CN it checks every client under `clients/`. Warnings go to stderr while the exit code stays 0 (matching the legacy script); it does not replace an import test on the real device.
+Checks client p12 files: client-only content, expected algorithms, password length and the client certificate chain against the CA. With no CN it checks every client under `clients/`. A missing CA or a failed chain check goes to stderr while the exit code stays 0 (matching the legacy script); it does not replace an import test on the real device. Each `--json` report adds `chainChecked`, `chainOK` and `chainMessage`. Chain validation checks trust and validity, not CRL revocation status.
 
 ### cert issue
 
@@ -170,6 +181,18 @@ neca cert package alice --platforms windows,android --installers windows --p12-p
 ~~~
 
 Rebuilds platform packages from an existing certificate without issuing a new certificate or changing keys. The platform/installer/p12 arguments match issue.
+
+### cert import
+
+~~~bash
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --allow-expired
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --dry-run
+~~~
+
+v1 imports only a p12 issued by the current CA and passing the current CA chain. The p12 must contain exactly one client certificate and a matching private key; existing CN, serial, clients directory or meta is rejected without overwrite or repair. The password file must be a regular 0600 file.
+
+Expired certificates are rejected by default. With `--allow-expired` plus Y/N confirmation, they are imported with index status E and the command prints `neca cert reissue <CN>` and `neca cert revoke <CN>`. JSON requires `--allow-expired` (only for expired input) and `--yes`. `--zip`, `--platforms`, `--installers` and `--p12-profile` follow issue semantics.
 
 ## pki: index and downloads
 

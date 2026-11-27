@@ -31,7 +31,7 @@ spaces, slashes, non-ASCII characters or `..`.
 | Command | Purpose |
 |---|---|
 | `neca cert list` | List certificates |
-| `neca cert verify [CN]` | Check p12 algorithm, certificate count and password |
+| `neca cert verify [CN]` | Check p12 algorithm, certificate count, password and chain |
 | `neca cert issue <CN> ...` | Issue certificate and packages |
 | `neca cert reissue <CN> ...` | Archive and reissue |
 | `neca cert revoke <CN>` | Revoke and update the CRL |
@@ -41,6 +41,7 @@ spaces, slashes, non-ASCII characters or `..`.
 | `neca trash purge <ID>` | Backend physical purge (Y/N, default N) |
 | `neca cert platform add / set <CN> ...` | Add packages or update platform metadata |
 | `neca cert package <CN> ...` | Rebuild packages from an existing certificate |
+| `neca cert import <CN> --p12 ... --password-file ...` | Import a current-CA p12 (expired needs confirmation) |
 | `neca cert export issued / revoked` | Export CSV |
 | `neca pki index sync` | Rebuild index/meta for manually installed certificates |
 
@@ -75,8 +76,8 @@ neca cert verify
 ~~~
 
 `verify` checks that the p12 contains only the client certificate, uses the expected
-algorithm and has a valid password length. It does not replace an import test on the
-target client.
+algorithm, has a valid password length and verifies the client chain against the CA.
+Chain validation checks trust and validity, not CRL revocation status; it does not replace an import test on the target client.
 
 ## Reissue
 

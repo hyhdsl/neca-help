@@ -55,11 +55,11 @@ highest sensitivity level:
 
 ## Upgrade and rollback
 
-Pin version tags; do not use `latest` as a production dependency:
+Pin version tags; do not use `latest` as a deployed dependency:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.0.1
-docker pull ghcr.io/hyhdsl/neca-web:v1.0.1
+docker pull ghcr.io/hyhdsl/neca:v1.2.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.2.0
 ~~~
 
 Back up before upgrading. After upgrading, verify:

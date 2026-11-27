@@ -97,7 +97,7 @@ Do not send it through public IM groups or unencrypted email.
 - **No installer script was generated**: add `--installers`. This is an intentional
   safe default.
 - **Linux/macOS scripts are unverified**: target systems differ; run a dry-run first,
-  then roll out in production.
+  then roll out to the target environment.
 - **The p12 does not open on an old Android device**: use the default `compat`
   profile; `modern` does not guarantee compatibility with old devices.
 - **The archive download returns 410/404**: it expired or was cleaned; generate it

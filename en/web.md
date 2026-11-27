@@ -134,12 +134,12 @@ X-Neca-Client-CN:   <verified administrator certificate CN>
 ~~~
 
 necad accepts only loopback proxy requests and rejects forged headers. Set
-`NECA_WEB_SECURE_COOKIES=1` after TLS termination. This production server currently uses
-OpenSSH forwarding and has no public TLS/mTLS endpoint.
+`NECA_WEB_SECURE_COOKIES=1` after TLS termination. When using OpenSSH forwarding, leave it
+unset; no public TLS/mTLS endpoint is required by this configuration.
 
 ## Language and theme
 
-- zh-CN/en-US switching is available via the `neca_lang` cookie.
+- zh-CN/zh-TW/en-US switching is available via the `neca_lang` cookie.
 - The default language follows `neca.json` `language`.
 - Light/dark theme is stored in browser localStorage.
 - Theme and language controls live under Settings → General; they do not change server permissions or read-only state.

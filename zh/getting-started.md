@@ -70,7 +70,7 @@ neca cert issue alice \
 neca cert verify alice
 ~~~
 
-`verify` 检查 p12 的算法、证书数量与密码长度。批量检查：
+`verify` 检查 p12 的算法、证书数量、密码长度与客户端证书链。批量检查：
 
 ~~~bash
 neca cert verify
@@ -90,7 +90,7 @@ neca pki downloads clean --expired
 
 ## 5. 可选：打开 Web 面板
 
-Web 默认只读，监听回环地址。生产环境通常通过 SSH 本地转发访问：
+Web 默认只读，监听回环地址。部署环境通常通过 SSH 本地转发访问：
 
 ~~~bash
 ssh -L 18080:127.0.0.1:18080 root@<SERVER>

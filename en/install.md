@@ -125,7 +125,7 @@ sha256sum -c /tmp/neca-checksum
 
 On arm64, replace `neca-linux-amd64` with `neca-linux-arm64`.
 This path was verified in a Debian bookworm container for download, checksum, install, `--version` and `help`;
-it has not been verified as a direct replacement for the Docker deployment on a production host.
+it has not been verified as a direct replacement for the Docker deployment on a deployment host.
 
 ### B2. Install to a system path
 

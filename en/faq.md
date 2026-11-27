@@ -68,10 +68,11 @@ Backups contain the CA private key; encrypt and restrict them.
 
 It remains in `legacy/` for rollback and shadow tests. New deployments should use neca.
 
-## Why are external PRs paused?
+## How can I contribute?
 
-The project is still in its development phase and currently accepts maintainer merges
-only. Use Issues, or fork under AGPL.
+Open an Issue to describe the problem or proposed change first. Before a PR, read the
+development policy and AGPL requirements. The maintainer decides whether to merge based
+on scope, tests and license impact.
 
 ## What license applies?
 

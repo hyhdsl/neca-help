@@ -1,0 +1,26 @@
+- [🏠 首頁](/ ':ignore :target=_self')
+- [簡體中文](/zh/ ':ignore :target=_self')
+- [English](/en/ ':ignore :target=_self')
+- [🏠 說明中心](README.md)
+- [⚡ 快速開始](getting-started.md)
+- [📦 安裝、升級與復原](install.md)
+- [🧭 常用指令速查](cheatsheet.md)
+- [📚 子命令參考](commands.md)
+- [🔐 憑證管理](certificates.md)
+- [💻 平台套件與用戶端安裝](packages.md)
+- [🖥️ Web 面板](web.md)
+- [🔌 Web API（實驗性）](api.md)
+- [⚙️ 部署與日常維運](operations.md)
+- [🛡️ 安全、權限與備份](security.md)
+- [🧰 疑難排解](troubleshooting.md)
+- [❓ 常見問題](faq.md)
+- [🛠️ 開發、授權條款與回饋](development.md)
+- [⚙️ GitHub 工作流程](github-workflows.md)
+- [🔬 影子比對](shadow-comparison.md)
+
+---
+
+- 版本：v1.2.0
+- 語言版本：繁體中文（zh-TW，臺灣用語）
+- [專案儲存庫](https://github.com/hyhdsl/neca)
+- [問題回報](https://github.com/hyhdsl/neca/issues)

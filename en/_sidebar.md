@@ -1,5 +1,6 @@
 - [🏠 Home](/ ':ignore :target=_self')
 - [中文](/zh/ ':ignore :target=_self')
+- [繁體中文](/zh-TW/ ':ignore :target=_self')
 - [🏠 Help Center](README.md)
 - [⚡ Quick start](getting-started.md)
 - [📦 Install, upgrade and rollback](install.md)
@@ -17,7 +18,7 @@
 
 ---
 
-- Version: v1.0.1
+- Version: v1.2.0
 - [Project](https://github.com/hyhdsl/neca)
 - [Issues](https://github.com/hyhdsl/neca/issues)
 - [中文完整文档](/ ':ignore :target=_self')

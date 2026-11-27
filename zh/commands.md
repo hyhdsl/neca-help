@@ -1,6 +1,6 @@
 # 子命令参考
 
-> 适用于 **neca v1.1.2**。本文覆盖全部内置子命令、参数、交互确认与退出码。
+> 适用于 **neca v1.2.0**。本文覆盖全部内置子命令、参数、交互确认与退出码。
 > 全局开关可放在命令任意位置；在任一命令后加 `--help` 可查看该层用法。
 > 写操作建议先加 `--dry-run`，确认输出后再实际执行。
 
@@ -12,13 +12,13 @@
 | `--dry-run` | 只打印将要执行的写命令，不执行、不修改文件 |
 | `--yes` / `-y` | 跳过 Y/N 确认；审计记录会标记为显式确认 |
 | `-q` / `--quiet` | 仅输出错误；与 `--json` 并用时以 JSON 为准 |
-| `--lang zh-CN\|en-US` | 覆盖本次命令语言；未指定时读取配置 |
+| `--lang zh-CN\|zh-TW\|en-US` | 覆盖本次命令语言；未指定时读取配置 |
 | `--config <文件>` | 本次命令使用指定配置文件（等价设置 `NECA_CONFIG`） |
 | `--reload-mode creds\|restart` | 覆盖 CRL 重载方式（等价设置 `NECA_RELOAD_MODE`） |
 | `--version` / `-V` | 显示版本、提交号、构建时间与平台 |
 | `-h` / `--help` | 显示当前层帮助 |
 
-`--dry-run` 只拦截会写状态的命令：cert 的 issue/reissue/revoke/unrevoke/trash/platform/package/export，pki index sync、pki downloads clean，trash restore/purge，以及 web 的 readonly on/off、idle-timeout 修改、export on/off、lock、lockdown。只读命令不受影响。
+`--dry-run` 只拦截会写状态的命令：cert 的 issue/reissue/revoke/unrevoke/trash/platform/package/export，pki index sync、pki downloads clean，trash restore/purge，以及 web 的 readonly on/off、idle-timeout 修改、export on/off、lock、lockdown。只读命令不受影响。`cert import` 是例外：`--dry-run` 由命令自身执行只读校验并输出计划，不写入。
 
 **退出码**：`0` 成功（允许附带 WARN）；`1` 用法错误；`2` 运行期失败；`3` 前置条件不满足（证书已存在、缺 CA、helper 不可用、权限不足等）。
 
@@ -42,6 +42,17 @@ neca cert issue --help
 ~~~
 
 不带参数运行 `neca` 会进入交互向导；`neca wizard` 也可显式进入。向导菜单 0–10 分别对应：退出、签发、吊销、恢复、重签、补平台、导出已签发、导出已吊销、列表、索引同步、移入回收站。每个动作执行前会打印等价 CLI 命令。
+
+### neca completion
+
+~~~bash
+source <(neca completion bash)
+source <(neca completion zsh)   # 需要先启用 compinit
+neca completion fish | source
+neca completion powershell | Out-String | Invoke-Expression
+~~~
+
+生成 bash、zsh、fish、PowerShell 补全脚本，输出到 stdout，不修改 shell 配置。补全覆盖顶层命令、命名空间子命令、别名与主要开关；PowerShell 也可使用简写 `pwsh`。持久安装时按所用 shell 的补全目录保存脚本即可。
 
 ## config
 
@@ -107,7 +118,7 @@ neca cert verify alice
 neca cert verify alice bob
 ~~~
 
-检查客户端 p12：是否只含客户端证书、算法是否符合预期、密码长度是否合规。省略 CN 时检查 `clients/` 下全部客户端。告警写入 stderr，但退出码仍为 0（与历史脚本一致）；它不能替代客户端实机导入测试。
+检查客户端 p12：是否只含客户端证书、算法是否符合预期、密码长度是否合规，并使用 CA 证书校验客户端证书链。省略 CN 时检查 `clients/` 下全部客户端。CA 缺失或链校验失败会写入 stderr 告警，但退出码仍为 0（与历史脚本一致）；它不能替代客户端实机导入测试。`--json` 的每个 report 额外包含 `chainChecked`、`chainOK` 与 `chainMessage`。链校验只验证信任链与有效期，不检查 CRL 吊销状态。
 
 ### cert issue
 
@@ -181,6 +192,18 @@ neca cert package alice --platforms windows,android --installers windows --p12-p
 ~~~
 
 从已有证书重建平台包，不签发新证书、不更换密钥。参数与 issue 的平台/安装器/p12 部分相同。
+
+### cert import
+
+~~~bash
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --allow-expired
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --dry-run
+~~~
+
+v1 只导入由当前 CA 签发、能通过当前 CA 证书链校验的 p12。p12 必须恰好包含一个客户端证书和一个匹配私钥；CN、序列号、clients 目录或 meta 冲突时拒绝，不覆盖、不 repair。密码文件必须是权限 0600 的普通文件。
+
+过期证书默认拒绝；使用 `--allow-expired` 并完成 Y/N 二次确认后，以 index 状态 E 导入，并提示随后执行 `neca cert reissue <CN>` 或 `neca cert revoke <CN>`。JSON 模式需要同时提供 `--allow-expired`（仅过期时）和 `--yes`。`--zip` 可在导入后生成下载包；`--platforms`/`--installers`/`--p12-profile` 与 issue 语义一致。
 
 ## pki：索引与下载目录
 

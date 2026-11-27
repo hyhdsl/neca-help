@@ -1,7 +1,7 @@
 # Web API（实验性）
 
 > **状态：实验性，不是稳定公开 API。** 端点、字段和认证方式可能随版本调整；
-> 当前没有 OpenAPI 契约，也不承诺第三方兼容。生产自动化请先在测试环境验证。
+> 接口为实验性，不承诺第三方兼容；自动化前请先在测试环境验证。
 
 ## 适用范围
 
@@ -85,7 +85,7 @@ curl -sS -b "$JAR" "$BASE/api/v1/capabilities" | jq .
 
 `expiry` 只返回未来窗口内到期的 `valid` 证书；非法值会被忽略。
 
-不支持 delete、package 或设置编辑。
+不支持 delete、package 或设置编辑。证书对象在导入后额外包含平铺的 `created`、`notBefore`、`importSource`；旧证书没有这些字段时省略，不作为有效性判断依据。
 
 ## 示例：签发
 

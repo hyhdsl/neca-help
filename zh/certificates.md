@@ -30,7 +30,7 @@ CN 同时是 VPN 用户标识、目录名和证书 Common Name。不要使用空
 | 命令 | 作用 |
 |---|---|
 | `neca cert list` | 列出证书 |
-| `neca cert verify [CN]` | 检查 p12 算法、证书数量、密码 |
+| `neca cert verify [CN]` | 检查 p12 算法、证书数量、密码与证书链 |
 | `neca cert issue <CN> ...` | 签发证书与平台包 |
 | `neca cert reissue <CN> ...` | 归档旧证书并重签 |
 | `neca cert revoke <CN>` | 吊销并更新 CRL |
@@ -41,6 +41,7 @@ CN 同时是 VPN 用户标识、目录名和证书 Common Name。不要使用空
 | `neca cert platform add <CN> ...` | 补平台包 |
 | `neca cert platform set <CN> ...` | 修改平台标注 |
 | `neca cert package <CN> ...` | 从现有证书重建平台包 |
+| `neca cert import <CN> --p12 ... --password-file ...` | 导入当前 CA 签发的 p12（过期证书需二次确认） |
 | `neca cert export issued` / `neca cert export revoked` | 导出 CSV |
 | `neca pki index sync` | 为手工放入的证书补索引与元数据 |
 
@@ -80,8 +81,8 @@ neca cert verify alice
 neca cert verify
 ~~~
 
-`verify` 会检查 p12 是否只含客户端证书、是否使用预期的算法、密码长度是否合规。
-它不替代客户端实机导入测试。
+`verify` 会检查 p12 是否只含客户端证书、是否使用预期的算法、密码长度是否合规，并使用 CA 证书校验客户端证书链。
+链校验只验证信任链与有效期，不检查 CRL 吊销状态；它不替代客户端实机导入测试。
 
 ## 重签
 

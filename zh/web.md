@@ -40,7 +40,7 @@ Web 容器没有 `ca.key`、客户端私钥或 `docker.sock`；helper 才挂载�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.1.2 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.2.0 ./init-web-secrets.sh
 ~~~
 
 脚本以交互方式读取管理员密码并创建 `web-secrets/`、`session.key`、
@@ -156,7 +156,7 @@ necad 只接受来自回环代理的请求，并清除客户端伪造头。TLS �
 
 ## 语言与主题
 
-- 页面支持 zh-CN / en-US 切换，使用 `neca_lang` Cookie。
+- 页面支持 zh-CN / zh-TW / en-US 切换，使用 `neca_lang` Cookie。
 - 默认语言跟随 `neca.json` 的 `language`。
 - 支持浅色/深色主题，选择保存在浏览器 localStorage。
 - 主题与语言切换位于“设置 → 通用”，不改变服务端权限或只读状态。
