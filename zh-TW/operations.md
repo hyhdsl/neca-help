@@ -80,8 +80,8 @@ NECA_ROOT=/opt/ipsec bash scripts/check-deploy-permissions.sh
 固定版本標籤，不要用 `latest` 當作正式環境相依：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
-docker pull ghcr.io/hyhdsl/neca-web:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
 ~~~
 
 升級前備份；升級後驗證：

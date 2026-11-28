@@ -89,7 +89,7 @@ object storage or CI artifacts.
 ## Supply chain and license
 
 - Pin image tags; do not use `latest` in deployed environments.
-- Pull only from the official repository/GHCR and verify checksums.
+- Pull only from the official repository/GHCR; verify checksums and signer fingerprints with [GPG verification](gpg.md).
 - **AGPL-3.0-only** applies; network use and distribution carry source-disclosure duties.
 - Code and docs contain AI-assisted content; review before use.
 

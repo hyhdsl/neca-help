@@ -42,6 +42,8 @@ spaces, slashes, non-ASCII characters or `..`.
 | `neca cert platform add / set <CN> ...` | Add packages or update platform metadata |
 | `neca cert package <CN> ...` | Rebuild packages from an existing certificate |
 | `neca cert import <CN> --p12 ... --password-file ...` | Import a current-CA p12 (expired needs confirmation) |
+| `neca cert import <CN> --cert ... --key ...` | Import a PEM certificate and key (optional `--key-password-file`) |
+| `neca cert import-batch <DIR>` | Batch import p12 or cert+key from per-CN directories (partial success) |
 | `neca cert export issued / revoked` | Export CSV |
 | `neca pki index sync` | Rebuild index/meta for manually installed certificates |
 

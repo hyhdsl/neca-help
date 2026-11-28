@@ -4,6 +4,7 @@
 - [🏠 Help Center](README.md)
 - [⚡ Quick start](getting-started.md)
 - [📦 Install, upgrade and rollback](install.md)
+- [🔏 GPG verification](gpg.md)
 - [🧭 Command cheat sheet](cheatsheet.md)
 - [📚 Command reference](commands.md)
 - [🔐 Certificate management](certificates.md)
@@ -15,10 +16,12 @@
 - [🧰 Troubleshooting](troubleshooting.md)
 - [❓ FAQ](faq.md)
 - [🛠️ Development, license and feedback](development.md)
+- [⚙️ GitHub workflows](github-workflows.md)
+- [🔬 Shadow comparison](shadow-comparison.md)
 
 ---
 
-- Version: v1.2.0
+- Version: v1.5.2
 - [Project](https://github.com/hyhdsl/neca)
 - [Issues](https://github.com/hyhdsl/neca/issues)
 - [中文完整文档](/ ':ignore :target=_self')

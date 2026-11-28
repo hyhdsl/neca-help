@@ -40,7 +40,7 @@ Web 容器沒有 `ca.key`、用戶端私鑰或 `docker.sock`；helper 才掛載�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.2.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
 ~~~
 
 指令碼以互動方式讀取管理員密碼並建立 `web-secrets/`、`session.key`、
@@ -106,7 +106,7 @@ docker kill --signal=HUP neca-web
 `docker kill --signal=HUP neca-web`。`web.listen`、`adminCNs`、passkey 變更仍需
 重新啟動 web 容器。
 
-Web 寫入操作包含 issue/revoke/unrevoke/reissue，以及 M11.1 的「移入資源回收筒」；簽發頁平台使用核取方塊（windows/linux/macos/android/ios），並可單獨勾選「一鍵安裝指令碼」；預設不產生，僅 Windows/Linux/macOS 支援，由使用者本次簽發決定，不受全域 `NECA_INSTALLERS` 自動影響。設定頁僅支援允許清單中的高風險項目（readOnly/idleTimeout/匯出）；**不支援實體 purge 或 package**。
+Web 寫入操作包含 issue/revoke/unrevoke/reissue，以及「移入資源回收筒」；簽發頁平台使用核取方塊（windows/linux/macos/android/ios），並可單獨勾選「一鍵安裝指令碼」；預設不產生，僅 Windows/Linux/macOS 支援，由使用者本次簽發決定，不受全域 `NECA_INSTALLERS` 自動影響。設定頁僅支援允許清單中的高風險項目（readOnly/idleTimeout/匯出）；**不支援實體 purge 或 package**。
 helper 的 `readOnly` 檢查是第二道關卡，不能只依賴 UI 隱藏按鈕。
 
 ## 管理指令

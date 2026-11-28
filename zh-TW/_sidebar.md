@@ -4,6 +4,7 @@
 - [🏠 說明中心](README.md)
 - [⚡ 快速開始](getting-started.md)
 - [📦 安裝、升級與復原](install.md)
+- [🔏 GPG 驗證](gpg.md)
 - [🧭 常用指令速查](cheatsheet.md)
 - [📚 子命令參考](commands.md)
 - [🔐 憑證管理](certificates.md)
@@ -20,7 +21,7 @@
 
 ---
 
-- 版本：v1.2.0
+- 版本：v1.5.2
 - 語言版本：繁體中文（zh-TW，臺灣用語）
 - [專案儲存庫](https://github.com/hyhdsl/neca)
 - [問題回報](https://github.com/hyhdsl/neca/issues)

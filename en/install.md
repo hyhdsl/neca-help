@@ -17,6 +17,19 @@
 **Whole-page end:** complete A6 or B4.
 **Do not mix paths:** Docker runs A1–A6; binary runs B1–B4. The binary path does not include Web or helper.
 
+## 0.1 Runtime resource baseline
+
+Measured on Linux amd64 with 2 vCPU and 1.6 GiB RAM on 2026-11-28 under low load. CLI and Web are listed separately; Docker, strongSwan, reverse-proxy and high-concurrency/large-PKI overhead is not included.
+
+| Component | Minimum (low-load headroom) | Recommended |
+|---|---|---|
+| `neca` CLI | 1 vCPU / 64 MiB RAM / 256 MiB free disk | 1 vCPU / 256 MiB / 1 GiB |
+| `neca-web` + helper | 1 vCPU / 256 MiB / 512 MiB free disk | 2 vCPU / 512 MiB / 2 GiB |
+
+Observed: CLI executed `version` under a 16 MiB container limit and used about 2.8 MiB; Web/helper used about 15.5 MiB combined and passed its healthcheck; images were about 126.5 MiB and 135.7 MiB. Docker/OpenSSL/browser prerequisites follow the install steps; unlisted host details only need to pass installation and work normally.
+
+After downloading release assets, complete [GPG verification](gpg.md) (fingerprint, checksums and Git tag) before running the installation commands.
+
 ## Method A: Docker Compose installation (A1–A6)
 
 **Scope:** A1–A6; A5 is the optional Web write capability. Completing A6 completes the Docker installation.
@@ -63,14 +76,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 Pull a pinned image if needed:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
 ~~~
 
 ### A4. Optional read-only Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.2.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -116,7 +129,7 @@ Certificate operations still require configuration, PKI and OpenSSL.
 ### B1. Download and verify the binary
 
 ~~~bash
-VERSION=v1.2.0
+VERSION=v1.5.2
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -171,8 +184,8 @@ tar -C /opt/ipsec -czf /root/ipsec-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
 Docker path: update the compose image tags, then run:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
-docker pull ghcr.io/hyhdsl/neca-web:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 
