@@ -1,6 +1,6 @@
 # Command reference
 
-> Applies to **neca v1.2.0**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
+> Applies to **neca v1.5.2**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
 > Global options may appear anywhere on the command line; append `--help` to any command to see that level's usage.
 > Run write commands with `--dry-run` first.
 
@@ -41,7 +41,7 @@ neca cert --help
 neca cert issue --help
 ~~~
 
-Running `neca` with no arguments starts the interactive wizard; `neca wizard` opens it explicitly. Menu items 0–10 map to exit, issue, revoke, unrevoke, reissue, add platform, export issued, export revoked, list, index sync and move to recycle bin. The equivalent CLI command is printed before each action.
+Running `neca` with no arguments starts the interactive wizard; `neca wizard` opens it explicitly. The wizard header shows the version and a `neca help` hint; the top-level menu is certificate management, import / export, trash, maintenance & diagnostics, and help. Import / export contains p12 import, PEM cert+key import and issued/revoked CSV export. The equivalent CLI command is printed before each action.
 
 ### neca completion
 
@@ -186,13 +186,40 @@ Rebuilds platform packages from an existing certificate without issuing a new ce
 
 ~~~bash
 neca cert import alice --p12 alice.p12 --password-file alice.p12.pass
-neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --allow-expired
-neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --dry-run
+neca cert import alice --cert alice.crt --key alice.key
+neca cert import alice --cert alice.crt --key alice.key --key-password-file alice.key.pass --dry-run
 ~~~
 
-v1 imports only a p12 issued by the current CA and passing the current CA chain. The p12 must contain exactly one client certificate and a matching private key; existing CN, serial, clients directory or meta is rejected without overwrite or repair. The password file must be a regular 0600 file.
+v1.4 supports two mutually exclusive sources: a p12 issued by the current CA and passing the current chain, or one PEM client certificate plus one PEM private key. The p12 or cert/key pair must match and contain exactly one client certificate and one key; existing CN, serial, clients directory, meta or CRL is rejected without overwrite or repair. Password and key files must be regular 0600 files on Unix (Windows has only ACL limitations); encrypted keys require --key-password-file.
 
 Expired certificates are rejected by default. With `--allow-expired` plus Y/N confirmation, they are imported with index status E and the command prints `neca cert reissue <CN>` and `neca cert revoke <CN>`. JSON requires `--allow-expired` (only for expired input) and `--yes`. `--zip`, `--platforms`, `--installers` and `--p12-profile` follow issue semantics.
+
+### cert import-batch
+
+~~~bash
+neca cert import-batch ./batch --password-dir ./secrets --dry-run
+neca cert import-batch ./batch --password-dir ./secrets --yes
+~~~
+
+A batch directory is preferred; no manifest is required. Use one directory per CN and fixed filenames:
+
+~~~text
+batch/
+  alice/client.p12
+  bob/client.crt
+  bob/client.key
+  bob/entry.json
+secrets/
+  alice.pass
+  bob.key.pass
+~~~
+
+- p12 passwords accept `CN.pass`; the legacy `CN.p12.pass` name is also accepted. Encrypted keys use `CN.key.pass`.
+- The optional `entry.json` may override only `platforms`, `installers`, `p12Profile` and `allowExpired`; never passwords or arbitrary paths.
+- A failed item does not roll back successful items. Exit code 3 means at least one item failed; per-item results are still printed.
+- Expired certificates need `allowExpired` / `--allow-expired`; actual import still requires an explicit `--yes`. `--dry-run` writes nothing.
+- A CN directory must contain only the fixed files; unknown non-hidden files, subdirectories or symlinks fail that item.
+- CLI-only: the Web/helper never accepts p12, private keys or passwords. The wizard has no batch entry.
 
 ## pki: index and downloads
 

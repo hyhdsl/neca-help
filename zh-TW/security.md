@@ -104,7 +104,7 @@ Web 程序固定 UID/GID 10001，非 root。CLI 以 root 執行 CA 操作。lite
 ## 供應鏈與授權條款
 
 - 固定映像版本；正式環境不要用 `latest`。
-- 只從官方儲存庫／GHCR 拉取；核對 checksums。
+- 只從官方儲存庫／GHCR 拉取；使用 [GPG 驗證](gpg.md) 核對 checksums 與簽章指紋。
 - 專案以 **AGPL-3.0-only** 發布；散布或網路服務須履行原始碼公開義務。
 - 程式碼與文件含 AI 輔助生成內容；使用前請自行審查。
 

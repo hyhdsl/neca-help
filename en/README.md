@@ -1,6 +1,6 @@
 # 🏠 neca Help Center
 
-> Applies to **neca v1.2.0**. **Neko's Efficient Certificate Administrator (neca)** manages strongSwan IKEv2 user certificates and client packages; it is not the VPN server itself.
+> Applies to **neca v1.5.2**. **Neko's Efficient Certificate Administrator (neca)** manages strongSwan IKEv2 user certificates and client packages; it is not the VPN server itself.
 
 > **AI disclosure:** all code authoring, debugging, testing, CI/build/deploy scripting, documentation and this help site were produced by an AI agent. The human maintainer defines requirements, reviews changes, performs functional acceptance and handles production operations. See [AI-DISCLOSURE_EN.md](https://github.com/hyhdsl/neca/blob/main/AI-DISCLOSURE_EN.md) for scope and limits. AI output may contain errors; review and test before production use.
 
@@ -16,6 +16,7 @@
 - First run: [Quick start](getting-started.md); common commands: [Command cheat sheet](cheatsheet.md)
 - Full subcommand reference: [Command reference](commands.md)
 - Server install/upgrade: [Install, upgrade and rollback](install.md)
+- Verify a release: [GPG verification](gpg.md), including fingerprints before running binaries
 - Certificates: [Certificate management](certificates.md)
 - Client packages: [Platform packages](packages.md)
 - Browser panel: [Web panel](web.md)
@@ -54,5 +55,5 @@ default and is not exposed directly to the Internet.
 ## 📦 Version and source
 
 - Project: <https://github.com/hyhdsl/neca>
-- Release: <https://github.com/hyhdsl/neca/releases/tag/v1.2.0>
+- Release: <https://github.com/hyhdsl/neca/releases/tag/v1.5.2>
 - License: <https://github.com/hyhdsl/neca/blob/main/LICENSE>

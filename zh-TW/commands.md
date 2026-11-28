@@ -1,6 +1,6 @@
 # 子命令參考
 
-> 適用於 **neca v1.2.0**。本文涵蓋全部內建子命令、參數、互動確認與結束代碼。
+> 適用於 **neca v1.5.2**。本文涵蓋全部內建子命令、參數、互動確認與結束代碼。
 > 全域旗標可放在指令的任意位置；在任一指令後加 `--help` 可查看該層用法。
 > 寫入操作建議先加 `--dry-run`，確認輸出後再實際執行。
 
@@ -41,7 +41,7 @@ neca cert --help
 neca cert issue --help
 ~~~
 
-不帶參數執行 `neca` 會進入互動精靈；`neca wizard` 也可明確進入。精靈選單 0–10 分別對應：結束、簽發、撤銷、取消撤銷、重新簽發、補充平台、匯出已簽發、匯出已撤銷、清單、索引同步、移入資源回收筒。每個動作執行前會列印等值的 CLI 指令。
+不帶參數執行 `neca` 會進入互動精靈；`neca wizard` 也可明確進入。精靈頂部顯示版本資訊與 `neca help` 提示；一級選單為憑證管理、匯入 / 匯出、回收桶、維護與診斷、說明。匯入 / 匯出下可匯入 p12、匯入 PEM 憑證 + 私鑰、匯出已簽發 CSV、匯出已撤銷 CSV。每個動作執行前會列印等值的 CLI 指令。
 
 ### neca completion
 
@@ -192,6 +192,45 @@ neca cert package alice --platforms windows,android --installers windows --p12-p
 ~~~
 
 從既有憑證重建平台套件，不簽發新憑證、不更換金鑰。參數與 issue 的平台／安裝器／p12 部分相同。
+
+### cert import
+
+~~~bash
+neca cert import alice --p12 alice.p12 --password-file alice.p12.pass
+neca cert import alice --cert alice.crt --key alice.key
+neca cert import alice --cert alice.crt --key alice.key --key-password-file alice.key.pass --dry-run
+~~~
+
+支援兩種互斥來源：由目前 CA 簽發且可通過憑證鏈校驗的 p12，或 PEM 用戶端憑證 + PEM 私鑰。p12 或 cert/key 必須匹配，且恰好包含一張用戶端憑證與一把私鑰；CN、序號、clients 目錄、meta 或 CRL 衝突時拒絕，不覆寫、不修復。密碼檔與私鑰檔必須是權限 0600 的一般檔案（Windows 僅有 ACL 限制）；加密私鑰需使用 `--key-password-file`。
+
+過期憑證預設拒絕；使用 `--allow-expired` 並完成 Y/N 二次確認後，以 index 狀態 E 匯入，並提示 `neca cert reissue <CN>` 或 `neca cert revoke <CN>`。JSON 模式需同時提供 `--allow-expired`（僅過期時）與 `--yes`。`--zip`、`--platforms`、`--installers`、`--p12-profile` 與 issue 語意相同。
+
+### cert import-batch
+
+~~~bash
+neca cert import-batch ./batch --password-dir ./secrets --dry-run
+neca cert import-batch ./batch --password-dir ./secrets --yes
+~~~
+
+以批次目錄為準，不需要必填清單。每個 CN 一個目錄，檔名固定：
+
+~~~text
+batch/
+  alice/client.p12
+  bob/client.crt
+  bob/client.key
+  bob/entry.json
+secrets/
+  alice.pass
+  bob.key.pass
+~~~
+
+- p12 密碼檔支援 `CN.pass`；也相容舊命名 `CN.p12.pass`。加密金鑰使用 `CN.key.pass`。
+- 可選 `entry.json` 僅覆寫 `platforms`、`installers`、`p12Profile`、`allowExpired`；不要寫密碼或任意路徑。
+- 單筆失敗不會回滾其他成功項目；結束代碼 3 表示至少一筆失敗，仍會輸出逐項結果。
+- 過期憑證需要 `allowExpired`／`--allow-expired`；實際匯入仍必須明確 `--yes`；`--dry-run` 不寫入檔案。
+- CN 目錄只放固定檔案；未知非隱藏檔案、子目錄或符號連結會讓該筆失敗。
+- 維持 CLI-only；Web／helper 不接收 p12、私鑰或密碼。精靈沒有批次入口。
 
 ## pki：索引與下載目錄
 

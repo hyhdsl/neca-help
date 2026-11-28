@@ -17,6 +17,8 @@
 **整頁終點**：完成 A6 或 B4。
 **不要混用**：Docker 方式從 A1 到 A6；二進位方式從 B1 到 B4。二進位方式不包含 Web／helper。
 
+下載發布資產後，請先依 [GPG 驗證](gpg.md) 完成公鑰指紋核對、checksums 校驗與 Git tag 校驗，再執行安裝指令。
+
 ## 方式 A：Docker Compose 安裝（A1–A6）
 
 **路徑範圍**：A1–A6；A5 是選用的 Web 寫入能力。完成 A6 即完成 Docker 安裝。
@@ -63,14 +65,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 或先拉取固定版本映像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
 ~~~
 
 ### A4. 選用：啟動唯讀 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.2.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -115,7 +117,7 @@ neca doctor
 ### B1. 下載與校驗二進位檔
 
 ~~~bash
-VERSION=v1.2.0
+VERSION=v1.5.2
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -176,8 +178,8 @@ GPG 口令不要寫入指令、Git 或一般文件；還原與更多細節見
 Docker 方式：更新 compose 中的映像標籤後執行：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
-docker pull ghcr.io/hyhdsl/neca-web:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 

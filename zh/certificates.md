@@ -42,6 +42,8 @@ CN 同时是 VPN 用户标识、目录名和证书 Common Name。不要使用空
 | `neca cert platform set <CN> ...` | 修改平台标注 |
 | `neca cert package <CN> ...` | 从现有证书重建平台包 |
 | `neca cert import <CN> --p12 ... --password-file ...` | 导入当前 CA 签发的 p12（过期证书需二次确认） |
+| `neca cert import <CN> --cert ... --key ...` | 导入 PEM 证书与私钥（可选 `--key-password-file`） |
+| `neca cert import-batch <DIR>` | 按 CN 目录批量导入 p12 或 cert+key（可部分成功） |
 | `neca cert export issued` / `neca cert export revoked` | 导出 CSV |
 | `neca pki index sync` | 为手工放入的证书补索引与元数据 |
 

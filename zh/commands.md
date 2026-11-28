@@ -1,6 +1,6 @@
 # 子命令参考
 
-> 适用于 **neca v1.2.0**。本文覆盖全部内置子命令、参数、交互确认与退出码。
+> 适用于 **neca v1.5.2**。本文覆盖全部内置子命令、参数、交互确认与退出码。
 > 全局开关可放在命令任意位置；在任一命令后加 `--help` 可查看该层用法。
 > 写操作建议先加 `--dry-run`，确认输出后再实际执行。
 
@@ -41,7 +41,7 @@ neca cert --help
 neca cert issue --help
 ~~~
 
-不带参数运行 `neca` 会进入交互向导；`neca wizard` 也可显式进入。向导菜单 0–10 分别对应：退出、签发、吊销、恢复、重签、补平台、导出已签发、导出已吊销、列表、索引同步、移入回收站。每个动作执行前会打印等价 CLI 命令。
+不带参数运行 `neca` 会进入交互向导；`neca wizard` 也可显式进入。向导顶部显示版本信息和 `neca help` 提示；一级菜单为证书管理、导入 / 导出、回收站、维护与诊断、帮助。导入 / 导出下可导入 p12、导入 PEM 证书 + 私钥、导出已签发 CSV、导出已吊销 CSV。每个动作执行前会打印等价 CLI 命令。
 
 ### neca completion
 
@@ -197,13 +197,40 @@ neca cert package alice --platforms windows,android --installers windows --p12-p
 
 ~~~bash
 neca cert import alice --p12 alice.p12 --password-file alice.p12.pass
-neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --allow-expired
-neca cert import alice --p12 alice.p12 --password-file alice.p12.pass --dry-run
+neca cert import alice --cert alice.crt --key alice.key
+neca cert import alice --cert alice.crt --key alice.key --key-password-file alice.key.pass --dry-run
 ~~~
 
-v1 只导入由当前 CA 签发、能通过当前 CA 证书链校验的 p12。p12 必须恰好包含一个客户端证书和一个匹配私钥；CN、序列号、clients 目录或 meta 冲突时拒绝，不覆盖、不 repair。密码文件必须是权限 0600 的普通文件。
+v1.4 支持两种互斥来源：由当前 CA 签发、能通过证书链校验的 p12；或 PEM 格式的单张客户端证书 + PEM 私钥。p12 或 cert/key 必须匹配并恰好包含一个客户端证书和一个私钥；CN、序列号、clients 目录、meta 或 CRL 冲突时拒绝，不覆盖、不 repair。密码文件与私钥文件必须是权限 0600 的普通文件（Windows 仅记录 ACL 限制）；加密私钥需要 --key-password-file。
 
 过期证书默认拒绝；使用 `--allow-expired` 并完成 Y/N 二次确认后，以 index 状态 E 导入，并提示随后执行 `neca cert reissue <CN>` 或 `neca cert revoke <CN>`。JSON 模式需要同时提供 `--allow-expired`（仅过期时）和 `--yes`。`--zip` 可在导入后生成下载包；`--platforms`/`--installers`/`--p12-profile` 与 issue 语义一致。
+
+### cert import-batch
+
+~~~bash
+neca cert import-batch ./batch --password-dir ./secrets --dry-run
+neca cert import-batch ./batch --password-dir ./secrets --yes
+~~~
+
+批次目录优先，不需要必填清单。每个 CN 一个目录，文件名为固定约定：
+
+~~~text
+batch/
+  alice/client.p12                 # p12 来源
+  bob/client.crt                   # 或 cert+key 来源
+  bob/client.key
+  bob/entry.json                   # 可选覆盖
+secrets/
+  alice.pass                       # p12 密码
+  bob.key.pass                     # 加密私钥密码（如需要）
+~~~
+
+- p12 密码文件支持 CN.pass；兼容旧命名的 CN.p12.pass。加密 key 使用 CN.key.pass。
+- 可选 entry.json 仅覆盖 platforms、installers、p12Profile、allowExpired；不要写密码或任意路径。
+- 单条失败不会回滚其他成功项；退出码 3 表示至少一条失败，逐项结果仍会输出。
+- 过期证书需要 allowExpired/--allow-expired；实际导入仍必须显式 --yes，--dry-run 不写文件。
+- CN 目录只放固定文件；未知非隐藏文件、子目录或符号链接会让该条失败。
+- 保持 CLI-only；Web/helper 不接收 p12、私钥或口令。本版本不在向导中增加批量入口。
 
 ## pki：索引与下载目录
 

@@ -6,28 +6,19 @@
 
 - 触发：推送到 `main`、`feat/**`、`fix/**`、`chore/**`，以及所有 Pull Request。
 - 权限：只读仓库内容（`contents: read`），不使用发布密钥。
-- 作业：`build-and-test`。
-- 检查内容：
-  - `gofmt` 无差异；
-  - `go vet`；
-  - `govulncheck` 依赖漏洞扫描；
-  - 平台脚本模板 ASCII 校验；
-  - 中英文语言包 key 一致性；
-  - Markdown 链接、代码围栏与帮助站结构；
-  - `go test -race ./...`；
-  - Linux amd64/arm64 交叉编译；
-  - 新旧实现影子对比；
-  - `version` 冒烟测试。
+- 作业：`build-and-test`，以及依赖它的 `docker-smoke`。
+- 检查内容：`gofmt`、`go vet`、`govulncheck`、平台脚本模板 ASCII、语言包 key 一致性、文档链接/围栏/帮助站结构、`go test -race ./...`、Linux amd64/arm64 交叉编译、影子对比与 `version` 冒烟测试；随后构建 lite/web 镜像并验证入口。
 - 失败时不要合并；`main` 的分支保护要求 `build-and-test` 通过。
 
 ## 2. `release.yml`：GitHub Release
 
 - 触发：推送任意 `v*` 标签。
-- 权限：`contents: write`，只用于创建 Release 和上传资产。
-- 流程：检出标签对应提交 → 构建 Linux amd64/arm64 的 `neca`、`necad`、`neca-web-helper` → 生成 `checksums.txt` → 创建 Release。
-- 资产：6 个二进制 + `checksums.txt`，共 7 个。
-- 预发布规则：标签名包含 `-`（例如 `v1.3.0-preview.1`）时自动标记为 Pre-release；稳定标签不标记。
-- 注意：发布内容来自标签指向的提交；不要在标签创建后改代码再期待 Release 自动更新。
+- 预检：标签格式、tag 指向的 commit 是否位于 `main` 或 `release/x.y`，以及该 commit 的 `build-and-test` 是否成功。
+- 发布 job：使用受保护的 `release-signing` environment；只有 `v*` 标签可进入。
+- 流程：检出 → 构建 Linux amd64/arm64 的 `neca`、`necad`、`neca-web-helper` → 生成 `checksums.txt` → 在临时 GNUPGHOME 中导入发布私钥 → 签名并自验 → 导出公钥 → 创建 Release。
+- 资产：6 个二进制 + `checksums.txt` + `checksums.txt.asc` + `neca-gpg-key.asc`，共 9 个。
+- 预发布规则：标签名包含 `-`（例如 `v1.6.0-preview.1`）时自动标记为 Pre-release；稳定标签不标记。
+- 注意：发布内容来自标签指向的提交；不要在标签创建后改代码再期待 Release 自动更新。验证方式见 [GPG 验证](gpg.md)。
 
 ## 3. `docker.yml`：GHCR 多架构镜像
 
@@ -42,9 +33,9 @@
 ## 发布顺序
 
 1. 变更通过 PR 合入 `main`，并等待 `ci.yml` 的 `build-and-test` 成功。
-2. 创建 annotated 标签并推送，例如 `v1.2.0` 或 `v1.3.0-preview.2`。
+2. 创建 annotated 标签并推送，例如 `v1.5.2`。
 3. 观察 `release.yml` 与 `docker.yml` 均成功。
-4. 核对 Release 的 7 个资产、checksums 和 GHCR 镜像标签。
+4. 核对 Release 的 9 个资产、checksums、签名与 GHCR 镜像标签。
 5. 部署与回滚由另行批准的运维流程执行；本文不记录任何具体服务器信息。
 
 ## 常见问题

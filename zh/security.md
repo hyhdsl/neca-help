@@ -104,7 +104,7 @@ Web 进程固定 UID/GID 10001，非 root。CLI 以 root 执行 CA 操作。lite
 ## 供应链与许可
 
 - 固定镜像版本；生产不要用 `latest`。
-- 只从官方仓库/GHCR 拉取；核对 checksums。
+- 只从官方仓库/GHCR 拉取；使用 [GPG 验证](gpg.md) 核对 checksums 与签名指纹。
 - 项目以 **AGPL-3.0-only** 发布；分发或网络服务须履行源码公开义务。
 - 代码与文档含 AI 辅助生成内容；使用前自行审查。
 

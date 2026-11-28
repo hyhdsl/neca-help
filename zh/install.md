@@ -17,6 +17,19 @@
 **整页终点**：完成 A6 或 B4。
 **不要混用**：Docker 方式从 A1 到 A6；二进制方式从 B1 到 B4。二进制方式不包含 Web/helper。
 
+## 0.1 运行资源基线
+
+以下为 2026-11-28 在 Linux amd64、2 vCPU、1.6 GiB 内存环境下的低负载实测与安全余量；CLI 与 Web 分开给出，不包含宿主 Docker、strongSwan、反向代理或高并发/大证书库的额外开销。
+
+| 组件 | 最低（低负载余量） | 建议 |
+|---|---|---|
+| `neca` CLI | 1 vCPU / 64 MiB 内存 / 256 MiB 可用磁盘 | 1 vCPU / 256 MiB / 1 GiB |
+| `neca-web` + helper | 1 vCPU / 256 MiB / 512 MiB 可用磁盘 | 2 vCPU / 512 MiB / 2 GiB |
+
+实测参考：CLI 在 16 MiB 容器限制下可执行 `version`，常驻约 2.8 MiB；Web/helper 常驻合计约 15.5 MiB，healthcheck 为 healthy；两个镜像分别约 126.5 MiB 与 135.7 MiB。Docker、OpenSSL 与浏览器前置按本页安装步骤执行；未单独列出的宿主细节以安装验证通过、可以正常工作为准。
+
+下载发布资产后，请先按 [GPG 验证](gpg.md) 完成公钥指纹核对、checksums 校验与 Git tag 校验，再执行安装命令。
+
 ## 方式 A：Docker Compose 安装（A1–A6）
 
 **路径范围**：A1–A6；A5 是可选的 Web 写能力。完成 A6 即完成 Docker 安装。
@@ -63,14 +76,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 或先拉取固定版本镜像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
 ~~~
 
 ### A4. 可选：启动只读 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.2.0 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -115,7 +128,7 @@ neca doctor
 ### B1. 下载与校验二进制
 
 ~~~bash
-VERSION=v1.2.0
+VERSION=v1.5.2
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -176,8 +189,8 @@ GPG 口令不要写入命令、Git 或普通文档；恢复与更多细节见
 Docker 方式：更新 compose 中的镜像标签后执行：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.2.0
-docker pull ghcr.io/hyhdsl/neca-web:v1.2.0
+docker pull ghcr.io/hyhdsl/neca:v1.5.2
+docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 

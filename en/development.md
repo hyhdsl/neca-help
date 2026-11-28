@@ -43,23 +43,22 @@ published.
 
 1. Merge into `main` and pass CI.
 2. Create a `vX.Y.Z` tag.
-3. `release.yml` builds binaries and checksums.
+3. `release.yml` builds binaries and checksums, then signs them with the dedicated release key.
 4. `docker.yml` pushes GHCR images.
 5. Upgrade the server with a pinned tag and retain rollback images.
 
 Preview tags (`vX.Y.Z-preview.N`) are not stable releases; old previews retain only
 the source archive.
 
-## Chinese and English documentation
+## Multilingual documentation
 
-The Chinese and English help pages cover the same topics and are both maintained
-manually. The Chinese documentation is authoritative for behavior and release notes.
-The language switch is in the top-right corner of the page.
+Simplified Chinese, Traditional Chinese and English help pages cover the same topics and are maintained manually. The Simplified Chinese documentation is authoritative for behavior and release notes. The language switch is in the page header and sidebar.
 
 ## Contributing and feedback
 
 - Describe issues or proposed changes at <https://github.com/hyhdsl/neca/issues> first.
 - PRs should include tests and license-impact notes for maintainer review.
+- See [GitHub workflows](github-workflows.md) and [shadow comparison](shadow-comparison.md) for CI and release internals.
 - For changes, fork the repository and follow AGPL and the
   [secondary-development requirements](https://github.com/hyhdsl/neca/blob/main/docs/SECONDARY-DEVELOPMENT.md).
 - For security issues, do not paste private keys, passwords or exploitable details in

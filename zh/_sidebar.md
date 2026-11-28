@@ -4,6 +4,7 @@
 - [🏠 帮助中心](README.md)
 - [⚡ 快速开始](getting-started.md)
 - [📦 安装、升级与回滚](install.md)
+- [🔏 GPG 验证](gpg.md)
 - [🧭 常用命令速查](cheatsheet.md)
 - [📚 子命令参考](commands.md)
 - [🔐 证书管理](certificates.md)
@@ -20,6 +21,6 @@
 
 ---
 
-- 版本：v1.2.0
+- 版本：v1.5.2
 - [项目仓库](https://github.com/hyhdsl/neca)
 - [问题反馈](https://github.com/hyhdsl/neca/issues)
