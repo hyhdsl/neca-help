@@ -65,14 +65,14 @@ docker compose -f docker-compose.neca.yml run --rm neca cert list
 或先拉取固定版本映像：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.5.2
+docker pull ghcr.io/hyhdsl/neca:v1.6.0
 ~~~
 
 ### A4. 選用：啟動唯讀 Web
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.6.0 ./init-web-secrets.sh
 docker compose -f docker-compose.neca.yml --profile web up -d web
 ~~~
 
@@ -117,7 +117,7 @@ neca doctor
 ### B1. 下載與校驗二進位檔
 
 ~~~bash
-VERSION=v1.5.2
+VERSION=v1.6.0
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/neca-linux-amd64"
 curl -fLO "https://github.com/hyhdsl/neca/releases/download/${VERSION}/checksums.txt"
 grep " neca-linux-amd64$" checksums.txt > /tmp/neca-checksum
@@ -178,8 +178,8 @@ GPG 口令不要寫入指令、Git 或一般文件；還原與更多細節見
 Docker 方式：更新 compose 中的映像標籤後執行：
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.5.2
-docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
+docker pull ghcr.io/hyhdsl/neca:v1.6.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.6.0
 docker compose -f /opt/ipsec/docker-compose.neca.yml --profile web up -d web
 ~~~
 

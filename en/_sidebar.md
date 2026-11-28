@@ -21,7 +21,7 @@
 
 ---
 
-- Version: v1.5.2
+- Version: v1.6.0
 - [Project](https://github.com/hyhdsl/neca)
 - [Issues](https://github.com/hyhdsl/neca/issues)
 - [中文完整文档](/ ':ignore :target=_self')

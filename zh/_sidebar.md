@@ -21,6 +21,6 @@
 
 ---
 
-- 版本：v1.5.2
+- 版本：v1.6.0
 - [项目仓库](https://github.com/hyhdsl/neca)
 - [问题反馈](https://github.com/hyhdsl/neca/issues)

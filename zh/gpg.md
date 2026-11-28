@@ -15,10 +15,10 @@
 
 ## 2. 下载验证材料
 
-以当前稳定版 v1.5.2 为例；其他版本把版本号替换为该 Release 的 tag：
+以当前稳定版 v1.6.0 为例；其他版本把版本号替换为该 Release 的 tag：
 
 ~~~bash
-gh release download v1.5.2 --repo hyhdsl/neca \
+gh release download v1.6.0 --repo hyhdsl/neca \
   --pattern checksums.txt \
   --pattern checksums.txt.asc \
   --pattern neca-gpg-key.asc
@@ -61,7 +61,7 @@ Git tag 使用既有个人 neca 密钥，与 Release 资产签名是两条验证
 
 ~~~bash
 git fetch --tags
-git tag -v v1.5.2
+git tag -v v1.6.0
 ~~~
 
 预期签名者指纹：

@@ -1,6 +1,6 @@
 # Command reference
 
-> Applies to **neca v1.5.2**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
+> Applies to **neca v1.6.0**. This page covers every built-in subcommand, its arguments, confirmation behavior and exit codes.
 > Global options may appear anywhere on the command line; append `--help` to any command to see that level's usage.
 > Run write commands with `--dry-run` first.
 
@@ -67,6 +67,20 @@ neca config init --from-env
 - Writes the config file; an existing file requires `--force`.
 - New files are created with mode 0600; overwriting preserves the existing mode.
 - `--from-env` writes the current effective configuration instead of the example template.
+- Generates a `schemaVersion: 2` config; v1/0 files remain readable.
+- Check an old file with `neca config migrate`; after review, use `--write` to migrate. A 0600 backup is created before writing.
+
+### config migrate
+
+~~~bash
+neca config migrate --check
+neca config migrate --write
+~~~
+
+- Checks only by default; `--check` makes the read-only intent explicit.
+- `--write` migrates a v1/0 file to schema v2, preserves its mode and creates a timestamped backup.
+- v2 strictly rejects unknown fields, duplicate keys, invalid enums/ranges, relative paths and Web safety violations; v1 remains lenient.
+- A v1 file containing fields unknown to v2 is refused for migration to avoid silent data loss.
 
 ### config show / validate / path
 
@@ -76,8 +90,8 @@ neca config validate
 neca config path
 ~~~
 
-- `show`: print a JSON snapshot of the effective configuration.
-- `validate`: load and validate the configuration; prints the config path on success.
+- `show`: print a JSON snapshot of the effective configuration, including `schemaVersion`, migration status, paths and Web settings.
+- `validate`: load and validate the configuration; v2 strictly checks unknown fields and invalid values, then prints the config path on success.
 - `path`: print only the config file path.
 
 ### config export-env

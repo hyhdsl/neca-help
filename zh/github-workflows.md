@@ -33,7 +33,7 @@
 ## 发布顺序
 
 1. 变更通过 PR 合入 `main`，并等待 `ci.yml` 的 `build-and-test` 成功。
-2. 创建 annotated 标签并推送，例如 `v1.5.2`。
+2. 创建 annotated 标签并推送，例如 `v1.6.0`。
 3. 观察 `release.yml` 与 `docker.yml` 均成功。
 4. 核对 Release 的 9 个资产、checksums、签名与 GHCR 镜像标签。
 5. 部署与回滚由另行批准的运维流程执行；本文不记录任何具体服务器信息。

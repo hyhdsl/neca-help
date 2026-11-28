@@ -1,6 +1,6 @@
 # 常用指令速查
 
-> 適用於 neca v1.5.2。
+> 適用於 neca v1.6.0。
 > 寫入操作先加 `--dry-run`；互動確認預設為 N，自動化可明確加 `--yes`（會留下稽核紀錄）。
 
 ## 版本、設定與診斷
@@ -8,6 +8,7 @@
 ~~~bash
 neca version
 neca config validate
+neca config migrate
 neca config show
 neca doctor
 ~~~

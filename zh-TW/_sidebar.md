@@ -21,7 +21,7 @@
 
 ---
 
-- 版本：v1.5.2
+- 版本：v1.6.0
 - 語言版本：繁體中文（zh-TW，臺灣用語）
 - [專案儲存庫](https://github.com/hyhdsl/neca)
 - [問題回報](https://github.com/hyhdsl/neca/issues)

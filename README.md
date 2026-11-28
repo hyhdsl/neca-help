@@ -6,7 +6,8 @@
 - [English docs](https://neca.nekobiglazyer.work/en/)
 - [繁體中文文件](https://neca.nekobiglazyer.work/zh-TW/)
 - [项目仓库](https://github.com/hyhdsl/neca)
-- [v1.5.2 Release](https://github.com/hyhdsl/neca/releases/tag/v1.5.2)
+- [v1.6.0 Release](https://github.com/hyhdsl/neca/releases/tag/v1.6.0)
+- [GPG verification / GPG 验证 / GPG 驗證](https://neca.nekobiglazyer.work/zh/#/gpg)
 
 默认只读；Web 写操作通过 root helper 的命令白名单执行。部署环境优先使用 OpenSSH
 本地转发，不直接暴露 Web 端口。

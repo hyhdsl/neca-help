@@ -1,6 +1,6 @@
 # 常用命令速查
 
-> 适用于 neca v1.5.2。
+> 适用于 neca v1.6.0。
 > 写操作先加 `--dry-run`；交互确认默认 N，自动化可显式加 `--yes`（会审计）。
 
 ## 版本、配置与诊断
@@ -8,6 +8,7 @@
 ~~~bash
 neca version
 neca config validate
+neca config migrate
 neca config show
 neca doctor
 ~~~

@@ -21,6 +21,7 @@ Web 容器沒有 `ca.key`、用戶端私鑰或 `docker.sock`；helper 才掛載�
 
 ~~~json
 {
+  "schemaVersion": 2,
   "web": {
     "enabled": true,
     "listen": "127.0.0.1:18080",
@@ -40,7 +41,7 @@ Web 容器沒有 `ca.key`、用戶端私鑰或 `docker.sock`；helper 才掛載�
 
 ~~~bash
 cd /opt/ipsec
-NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.5.2 ./init-web-secrets.sh
+NECA_IMAGE=ghcr.io/hyhdsl/neca:v1.6.0 ./init-web-secrets.sh
 ~~~
 
 指令碼以互動方式讀取管理員密碼並建立 `web-secrets/`、`session.key`、

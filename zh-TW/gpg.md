@@ -15,10 +15,10 @@
 
 ## 2. 下載驗證材料
 
-以目前穩定版 v1.5.2 為例；其他版本請替換版本號：
+以目前穩定版 v1.6.0 為例；其他版本請替換版本號：
 
 ~~~bash
-gh release download v1.5.2 --repo hyhdsl/neca \
+gh release download v1.6.0 --repo hyhdsl/neca \
   --pattern checksums.txt \
   --pattern checksums.txt.asc \
   --pattern neca-gpg-key.asc
@@ -61,7 +61,7 @@ Git tag 使用既有個人 neca 金鑰，與 Release 資產簽章是兩條驗證
 
 ~~~bash
 git fetch --tags
-git tag -v v1.5.2
+git tag -v v1.6.0
 ~~~
 
 預期簽章者指紋：

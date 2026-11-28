@@ -58,8 +58,8 @@ highest sensitivity level:
 Pin version tags; do not use `latest` as a deployed dependency:
 
 ~~~bash
-docker pull ghcr.io/hyhdsl/neca:v1.5.2
-docker pull ghcr.io/hyhdsl/neca-web:v1.5.2
+docker pull ghcr.io/hyhdsl/neca:v1.6.0
+docker pull ghcr.io/hyhdsl/neca-web:v1.6.0
 ~~~
 
 Back up before upgrading. After upgrading, verify:

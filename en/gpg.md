@@ -15,10 +15,10 @@ Do not rely on `Good signature` alone; always check the actual signer fingerprin
 
 ## 2. Download verification material
 
-For the current stable v1.5.2 (replace the tag for another release):
+For the current stable v1.6.0 (replace the tag for another release):
 
 ~~~bash
-gh release download v1.5.2 --repo hyhdsl/neca \
+gh release download v1.6.0 --repo hyhdsl/neca \
   --pattern checksums.txt \
   --pattern checksums.txt.asc \
   --pattern neca-gpg-key.asc
@@ -61,7 +61,7 @@ Git tags use the existing personal neca key, independent of release-asset signin
 
 ~~~bash
 git fetch --tags
-git tag -v v1.5.2
+git tag -v v1.6.0
 ~~~
 
 Expected signer fingerprint:

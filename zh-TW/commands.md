@@ -1,6 +1,6 @@
 # 子命令參考
 
-> 適用於 **neca v1.5.2**。本文涵蓋全部內建子命令、參數、互動確認與結束代碼。
+> 適用於 **neca v1.6.0**。本文涵蓋全部內建子命令、參數、互動確認與結束代碼。
 > 全域旗標可放在指令的任意位置；在任一指令後加 `--help` 可查看該層用法。
 > 寫入操作建議先加 `--dry-run`，確認輸出後再實際執行。
 
@@ -67,6 +67,20 @@ neca config init --from-env
 - 寫入設定檔；已存在時需 `--force`。
 - 新檔案權限為 0600；覆寫時保留原權限。
 - `--from-env` 以目前環境／預設值產生設定，而不是使用範例範本。
+- 產生 `schemaVersion: 2` 設定；v1/0 設定仍可讀取。
+- 升級舊設定先執行 `neca config migrate` 檢查；確認後用 `--write` 遷移，寫入前自動產生 0600 備份。
+
+### config migrate
+
+~~~bash
+neca config migrate --check
+neca config migrate --write
+~~~
+
+- 預設只檢查；`--check` 明確只讀，不修改檔案。
+- `--write` 將 v1/0 遷移到 schema v2，保留原檔案權限並建立帶時間戳的備份。
+- v2 嚴格拒絕未知欄位、重複鍵、非法列舉／範圍、相對路徑與 Web 安全邊界；v1 保持寬容讀取。
+- 含 v2 不識別欄位的 v1 設定會拒絕遷移，避免靜默遺失欄位。
 
 ### config show / validate / path
 
@@ -76,8 +90,8 @@ neca config validate
 neca config path
 ~~~
 
-- `show`：輸出目前生效設定的 JSON 快照，用於核對路徑與 Web 設定。
-- `validate`：載入並驗證設定；通過時輸出設定檔路徑。
+- `show`：輸出目前生效設定的 JSON 快照，包含 `schemaVersion`、遷移狀態、路徑與 Web 設定。
+- `validate`：載入並驗證設定；v2 嚴格檢查未知欄位與非法值，通過時輸出設定檔路徑。
 - `path`：只輸出目前設定檔路徑。
 
 ### config export-env

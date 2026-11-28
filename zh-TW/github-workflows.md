@@ -31,7 +31,7 @@
 ## 發布順序
 
 1. 變更通過 PR 合入 `main`，並等待 `ci.yml` 的 `build-and-test` 成功。
-2. 建立 annotated 標籤並推送，例如 `v1.5.2`。
+2. 建立 annotated 標籤並推送，例如 `v1.6.0`。
 3. 觀察 `release.yml` 與 `docker.yml` 均成功。
 4. 核對 Release 的 9 個資產、checksums、簽章與 GHCR 映像標籤。
 5. 部署與復原由另行批准的維運流程執行；本文不記錄任何特定伺服器資訊。

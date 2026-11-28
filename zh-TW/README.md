@@ -1,6 +1,6 @@
 # 🏠 neca 說明中心
 
-> 適用於 **neca v1.5.2**。**Neko's Efficient Certificate Administrator（neca）** 是 strongSwan IKEv2 使用者憑證管理工具，並非 VPN 伺服器本身；它負責簽發、撤銷、重新簽發憑證，產生用戶端套件，並維護 CRL。
+> 適用於 **neca v1.6.0**。**Neko's Efficient Certificate Administrator（neca）** 是 strongSwan IKEv2 使用者憑證管理工具，並非 VPN 伺服器本身；它負責簽發、撤銷、重新簽發憑證，產生用戶端套件，並維護 CRL。
 
 > **AI 揭露**：本專案的程式碼撰寫、除錯、測試、CI／建置／部署指令碼、說明文件與說明網站內容由 AI 完成；人類維護者負責需求、審查、功能驗收與正式環境操作。完整說明見 [AI-DISCLOSURE.md](https://github.com/hyhdsl/neca/blob/main/AI-DISCLOSURE.md)。AI 輸出可能有誤，請自行審查並在正式上線前驗證。
 
@@ -44,5 +44,5 @@ lite 與 neca-web 使用同一個版本標籤；Web 預設只監聽回送位址�
 ## 📦 版本與來源
 
 - 專案：<https://github.com/hyhdsl/neca>
-- 正式版：<https://github.com/hyhdsl/neca/releases/tag/v1.5.2>
+- 正式版：<https://github.com/hyhdsl/neca/releases/tag/v1.6.0>
 - 授權條款：<https://github.com/hyhdsl/neca/blob/main/LICENSE>

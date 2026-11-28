@@ -33,7 +33,7 @@ The repository has three workflows: quality gating, Release assets and container
 ## Release order
 
 1. Merge the change through a PR to `main` and wait for `build-and-test`.
-2. Create and push an annotated tag, for example `v1.5.2`.
+2. Create and push an annotated tag, for example `v1.6.0`.
 3. Confirm both `release.yml` and `docker.yml` succeed.
 4. Check the nine Release assets, checksums, signature and GHCR tags.
 5. Deployment and rollback use a separately approved operations process; this page records no server details.
